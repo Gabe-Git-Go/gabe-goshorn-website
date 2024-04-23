@@ -1,0 +1,20 @@
+export default function AboutMe(){
+    return (
+        <div id= 'about-me-wrapper'>
+            <h2 className="heading-2">About Me</h2>
+            
+            <p id="about-me-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nunc sed blandit libero volutpat. Quis commodo odio aenean sed adipiscing diam. Sit amet nulla facilisi morbi. Risus in hendrerit gravida rutrum quisque non tellus orci. In ante metus dictum at tempor commodo ullamcorper a lacus. A condimentum vitae sapien pellentesque habitant. Auctor urna nunc id cursus metus aliquam eleifend. Placerat orci nulla pellentesque dignissim enim sit. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus. Odio pellentesque diam volutpat commodo. Tincidunt vitae semper quis lectus nulla. Mi tempus imperdiet nulla malesuada pellentesque elit eget gravida. Faucibus nisl tincidunt eget nullam non. Dignissim diam quis enim lobortis scelerisque fermentum. Sed blandit libero volutpat sed cras ornare arcu dui. Sociis natoque penatibus et magnis dis. Eget nunc lobortis mattis aliquam faucibus purus. Vel turpis nunc eget lorem.
+
+Porttitor massa id neque aliquam vestibulum morbi. Ac placerat vestibulum lectus mauris. Sit amet consectetur adipiscing elit duis tristique sollicitudin nibh. Ipsum dolor sit amet consectetur. Vivamus arcu felis bibendum ut tristique et. Velit dignissim sodales ut eu sem integer. Diam ut venenatis tellus in metus vulputate eu. Sed vulputate odio ut enim blandit volutpat maecenas volutpat. Quisque id diam vel quam elementum pulvinar etiam. Nibh mauris cursus mattis molestie a iaculis at. Risus sed vulputate odio ut. Diam vel quam elementum pulvinar. Aliquet sagittis id consectetur purus. Nisi est sit amet facilisis magna etiam tempor orci. Ultricies integer quis auctor elit sed vulputate. Vitae ultricies leo integer malesuada.
+
+Gravida arcu ac tortor dignissim. Libero nunc consequat interdum varius sit amet mattis. Ornare aenean euismod elementum nisi quis eleifend quam adipiscing. Tristique risus nec feugiat in. Arcu felis bibendum ut tristique et egestas quis. Non curabitur gravida arcu ac. Hendrerit dolor magna eget est lorem. Turpis egestas maecenas pharetra convallis posuere. Orci a scelerisque purus semper eget. Et netus et malesuada fames. Quam id leo in vitae turpis massa sed elementum. In fermentum et sollicitudin ac orci phasellus. Odio facilisis mauris sit amet massa vitae.
+
+Dis parturient montes nascetur ridiculus. Velit laoreet id donec ultrices tincidunt. Sed cras ornare arcu dui vivamus arcu. Eros in cursus turpis massa tincidunt dui ut. Feugiat in ante metus dictum at tempor commodo. Mauris a diam maecenas sed enim ut. Turpis cursus in hac habitasse platea dictumst quisque sagittis purus. Amet luctus venenatis lectus magna fringilla urna porttitor. Nulla aliquet enim tortor at auctor urna nunc. Sed ullamcorper morbi tincidunt ornare massa eget. A iaculis at erat pellentesque adipiscing commodo elit at. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim diam. Sit amet aliquam id diam. Risus commodo viverra maecenas accumsan lacus vel.
+
+Dictum sit amet justo donec enim diam. In egestas erat imperdiet sed euismod nisi. In massa tempor nec feugiat nisl pretium fusce id velit. Rhoncus est pellentesque elit ullamcorper. Integer malesuada nunc vel risus commodo viverra maecenas accumsan. Ipsum nunc aliquet bibendum enim facilisis. Egestas quis ipsum suspendisse ultrices gravida dictum fusce. Aenean pharetra magna ac placerat vestibulum lectus mauris. Cras sed felis eget velit aliquet. Tellus id interdum velit laoreet. Posuere morbi leo urna molestie at elementum eu. Id faucibus nisl tincidunt eget nullam non. Tempor commodo ullamcorper a lacus vestibulum sed arcu non odio.
+            </p>
+
+        </div>
+    )
+}

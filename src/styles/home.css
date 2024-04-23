@@ -1,0 +1,12 @@
+/***Home Page Style Sheet****/
+#about-me-wrapper{
+    background-color: rgb(97, 97, 94);
+    max-width: 100%;
+    min-height: 300px;
+    color:rgb(255, 255, 255);
+    padding: 100px 100px;
+    text-align: left;
+}
+.heading-2{
+    margin-bottom: 15px;
+}
