@@ -45,6 +45,9 @@ import HireMe from './components/hire-me';
 function App() {
   return (
     <div className="App">
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+      </style>
     <BrowserRouter >
       <Header/>
       <Routes>
