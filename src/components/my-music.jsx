@@ -1,36 +1,61 @@
 import AboutMe from "./home-page-components/about-me";
 import '../styles/home.css'
 import MusicTile from "./shared/music-tile";
+import playBtn from '../assets/music-assets/music-ctrl-images/play_button.png'
+import playBtnPressed from '../assets/music-assets/music-ctrl-images/play_button_pressed.png'
+import pauseBtn from '../assets/music-assets/music-ctrl-images/pause_button.png'
+import pauseBtnPressed from '../assets/music-assets/music-ctrl-images/pause_button_pressed.png'
+import mySong from '../assets/music-assets/music-audio/the_park_80_bpm.wav'
 import { useEffect, useRef, useState } from "react";
 
 function MyMusic(){
+    const [isPauseBtnPressed,setPauseBtnPressed] = useState(false);
     const colorSwitch = useRef({value: true});
+    const [currSong, setCurrSong] = useState(new Audio(mySong))
     const [playSwitch, setPlaySwitch] = useState(false);
     const [numberOfMusicTiles,setNumberOfMusicTiles] = useState(100);
     const [themeColors,setThemeColors] = useState(["rgba(154, 183, 230,.75)","rgba(175, 219, 192,.75)"])
-    const [tileColorArray,setTileColorArray] = useState(generateRandomColor());
-    const [tileColNum,setTileColNum] = useState(7);
-    const [tempo,setTempo] = useState(140)
-    const [counter,setCounter] = useState(0);
+    const [tileColNum,setTileColNum] = useState(6);
+    const [tempo,setTempo] = useState(80)
     const [musicTileArray,setTileArray] = useState(getTileGrid());
-    let i = 0;
 
+    //When play switch is changed, update the tile grid, and stop/start audio
+    useEffect(()=>{
+        if(playSwitch){
+            for(let i=0;i<document.getElementsByClassName('music-tile').length;i++){
+                document.getElementsByClassName('music-tile').item(i).className = document.getElementsByClassName('music-tile').item(i).className.replace('paused','');
+                document.getElementsByClassName('music-tile').item(i).className += ' play'
+            }
+            currSong.play();
+        }else{
+            for(let i=0;i<document.getElementsByClassName('music-tile').length;i++){
+                document.getElementsByClassName('music-tile').item(i).className = document.getElementsByClassName('music-tile').item(i).className.replace('play','');
+                document.getElementsByClassName('music-tile').item(i).className += ' paused'
+            }
+            currSong.pause();
+        }
+        //currSong.current
+        setTileArray(getTileGrid());
 
-    //var styleRoot = document.querySelector(':root');
-    //styleRoot.style.setProperty('--numOfMusicTileCols', tileColNum);
+    },[playSwitch])
+
+    // useEffect(()=>{
+    //     setTimeout(()=>{
+    //         setPauseBtnPressed(false);
+    //     },1000)
+    // },[pauseBtnPressed])
+    
     function getTileGrid(){
-        console.log("AH")
         let tileArray = []
         for(let i=1;i<=numberOfMusicTiles;i++){
-            tileArray.push(<MusicTile isPlaying={playSwitch} colorGeneratorCallback = {(tileNumber,rowNumber,musicSwitch)=>generateRandomColor(tileNumber,rowNumber,musicSwitch)} tempo = {tempo} rowNumber = {Math.ceil(i/tileColNum)} tileNumber={i} key={i+"-music-tile"}></MusicTile>)
+            tileArray.push(<MusicTile isPlaying={playSwitch} themeColors = {themeColors} colorGeneratorCallback = {(tileNumber,rowNumber,musicSwitch)=>generateRandomColor(tileNumber,rowNumber,musicSwitch)} tempo = {tempo} rowNumber = {Math.ceil(i/tileColNum)} tileNumber={i} key={i+"-music-tile"}></MusicTile>)
         }
         return tileArray;
     }
-    function generateRandomColor(tileNumber,rowNumber,musicSwitch,setColorSwitchCallbacki){
+    function generateRandomColor(tileNumber,rowNumber,musicSwitch){
         let color = "";
         if(tileNumber===1){
             colorSwitch.value = !colorSwitch.value;
-            console.log("color switch",colorSwitch.value)
         } 
         if(colorSwitch.value){
             color = tileNumber%2===0?themeColors[0]:themeColors[1];
@@ -40,57 +65,27 @@ function MyMusic(){
         return color;
     }
 
-    function togglePlay(){
-        setPlaySwitch(!playSwitch);
+    function switchPlay(isOn){
+        if(!isOn){
+            setPauseBtnPressed(true);
+            setTimeout(()=>{
+                setPauseBtnPressed(false);
+            },500)
+        }
+        setPlaySwitch(isOn);
     }
-
-    
-        // return `rgba(${Math.floor(Math.random() * 255)}, 
-        //     ${Math.floor(Math.random() * 150)}, 
-        //     ${Math.floor(Math.random() * 0)},
-        //     ${Math.random() +.25}`;
-    //     let color = ""
-    //     console.log("The switch",musicSwitch)
-    //     if(tileNumber%2===0){
-    //         color = musicSwitch?'black':'white';
-    //     }else{
-    //         color = musicSwitch?'white':'black';
-    //     }
-    //     //setMusicSwitch(false);
-    //     return color;
-    // function startParty(){
-    //     console.log(i++);
-    //     let bpm = 120;
-    //     debugger;
-    //     setInterval(()=>{
-    //        // setTileColorArray(getAllRandomColors());
-    //     },4000);
-    // }
-
-    // function getAllRandomColors(){
-    //     console.log("woah")
-    //     let colorArray = [];
-    //     for(let i=0;i<numberOfMusicTiles;i++){
-    //         colorArray.push(generateRandomColor());
-    //     }
-    //     return colorArray;
-    // }
-
-    // function doNothing(){
-    //     console.log("IAM NOTHING")
-    // }
-
 
     return (
         <div id="hire-me-wrapper">
-            my-music
-            {/* <button onClick={togglePlay()}>play</button> */}
-            <button onClick={togglePlay}>Play me</button>
-            {/* <h1>{playSwitch}</h1> */}
+            <div className="music-ctrl-wrapper">
+                <img className={"music-ctrl"} id= "play-btn" onClick={ () =>switchPlay(true)} src={playSwitch?playBtnPressed:playBtn} alt="Play Button" />
+                <img className={"music-ctrl"} id = "pause-btn" onClick={ () =>switchPlay(false)} src={isPauseBtnPressed?pauseBtnPressed:pauseBtn} alt="Pause Buttton" />
+                <span className="music-ctrl song-title">N o w P la ying...</span>
+            </div>
             <div id="music-tile-wrapper">
-                    {
-                        musicTileArray
-                    }
+                {
+                    musicTileArray
+                }
             </div>
         </div>
     )

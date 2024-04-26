@@ -4,14 +4,30 @@
 }
 .App {
   text-align: center;
-  background-color: #2b2325f8;
-  height:100vh;
+  background-color:black;
+  background-image:
+  radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+  radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+  radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
+  radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
+  
+  background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
   color:aliceblue;
-  overflow:hidden;
+  /*overflow:hidden;*/
+  min-height: 100vh;
+  font-family: "Jersey 15", sans-serif;
+  font-style: normal;
+  font-weight: 100 !important;
+  font-size:24px;
 }
 *{
   margin:0;
   padding:0;
+}
+h1,h2,h3,h4,h5{
+  font-weight: 100 !important;
+  font-size: 100px;
 }
 .App-logo {
   height: 40vmin;
@@ -27,32 +43,9 @@
   background: radial-gradient(circle, rgba(255, 255, 255, 0.164) 0%, rgba(0, 213, 255, 0.082) 100%, rgba(2, 0, 36, 0.068) 100%);
    pointer-events: none;
 }
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.jersey-15-regular {
+  font-family: "Jersey 15", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
