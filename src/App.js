@@ -1,10 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import Home from './components/home';
 import Header from './components/shared/header';
 import {BrowserRouter, Routes, Route, Outlet} from 'react-router-dom'
 import './styles/shared.css'
-import MyMusic from './components/my-music';
+import MyMusic from './components/my-music/my-music';
 import HireMe from './components/hire-me';
 
 // document.onmousemove = handleMouseMove;
