@@ -1,11 +1,7 @@
-import playBtn from '../../../assets/music-assets/music-ctrl-images/play_button.png'
-import playBtnPressed from '../../../assets/music-assets/music-ctrl-images/play_button_pressed.png'
-import pauseBtn from '../../../assets/music-assets/music-ctrl-images/pause_button.png'
-import pauseBtnPressed from '../../../assets/music-assets/music-ctrl-images/pause_button_pressed.png'
 import { useEffect, useState } from "react";
+import ListGroup from 'react-bootstrap/ListGroup';
 
 export default function MusicController({allThemes, allSongs,songChangeCallback, theme, themeChangeCallback}){
-    const [isPauseBtnPressed,setPauseBtnPressed] = useState(false);
     const [selectedSong,setSelectedSong] = useState(allSongs[0].name)
     const [currSong,setCurrSong] = useState(new Audio(allSongs[0].audioFile))
     const [playSwitch, setPlaySwitch] = useState(false);
@@ -15,6 +11,7 @@ export default function MusicController({allThemes, allSongs,songChangeCallback,
     useEffect(()=>{
         document.getElementById('music-tile-wrapper').className = document.getElementById('music-tile-wrapper').className.replace(playSwitch?'paused':'play','');
         document.getElementById('music-tile-wrapper').className += ` ${playSwitch?'play':'paused'}`;
+        playSwitch? currSong.play() : currSong.pause();
     },[playSwitch])
 
     useEffect(()=>{
@@ -27,46 +24,49 @@ export default function MusicController({allThemes, allSongs,songChangeCallback,
         setPlaySwitch(false);
     },[selectedSong])
 
-
-    function switchPlay(isOn){
-        if(!isOn){
-            setPauseBtnPressed(true);
-            setTimeout(()=>{
-                setPauseBtnPressed(false);
-            },500)
-        }
-        setPlaySwitch(isOn);  
-    }
-
     function getThemes(){
         let themeOptions = [];
         allThemes.forEach((theme)=>{
-            themeOptions.push(<option key={theme.name} value={theme.name}>{theme.name}</option>)
+            themeOptions.push(
+            <ListGroup.Item action className="themeList" variant="dark" key={theme.name} onClick={()=>themeChangeCallback(theme.name)}>
+                {theme.name}
+            </ListGroup.Item>
+            )
+            // <option key={theme.name} value={theme.name}>{theme.name}</option>)
         })
         return themeOptions;
     }
     function getSongs(){
         let songOptions = [];
         allSongs.forEach((song)=>{
-            songOptions.push(<option key={song.name} value={song.name}>{song.name}</option>)
+            songOptions.push(
+                <ListGroup.Item action className="themeList" variant="dark" key={song.name} onClick={()=>setSelectedSong(song.name)}>
+                    {song.name}
+                </ListGroup.Item>
+            )
         })
         return songOptions;
     }
     return (
-        <div className="music-ctrl-wrapper">
-        <img className={"music-ctrl"} id= "play-btn" onClick={ () =>switchPlay(true)} src={playSwitch?playBtnPressed:playBtn} alt="Play Button" />
-        <img className={"music-ctrl"} id = "pause-btn" onClick={ () =>switchPlay(false)} src={isPauseBtnPressed?pauseBtnPressed:pauseBtn} alt="Pause Buttton" />
-        <span className="music-ctrl song-title">N o w P la ying...</span>
-        <label htmlFor="themeSelector">
-            <select value={theme} onChange={e => themeChangeCallback(e.target.value)} name="themeSelector" id="">
+    <div className="music-ctrl-wrapper">
+        <img className='song-img music-ctrl' src={(allSongs.find((song)=>song.name===selectedSong)).imageUrl} alt="" />
+        <span className="music-ctrl song-title">{selectedSong}</span>
+        <div className=" music-ctrl play-pause-container">
+            <input  type="checkbox" className="playpause-chk"  id="chkbx"/>
+            <label onClick= {()=> setPlaySwitch(!playSwitch)} htmlFor="chkbx"></label>
+        </div>
+
+        <div className='selector-wrapper'>
+            <ListGroup className='selector'>
+                <ListGroup.Item className="selector-title">Select Theme</ListGroup.Item>
                 {getThemes()}
-            </select>
-        </label>
-        <label htmlFor="songSelector">
-            <select value={selectedSong} onChange={e => setSelectedSong(e.target.value)} name="songSelector" id="">
+            </ListGroup>
+            <ListGroup className="selector">
+                <ListGroup.Item className="selector-title">Select Song</ListGroup.Item>
                 {getSongs()}
-            </select>
-        </label>
+            </ListGroup>
+                
+        </div>
     </div>
     )
 }

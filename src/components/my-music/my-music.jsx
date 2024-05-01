@@ -15,6 +15,37 @@ function MyMusic(){
     const [tempo,setTempo] = useState(80)
     const [musicTileArray,setTileArray] = useState(getTileGrid());
 
+    useEffect(() => {
+        // Function to be called when window is resized
+        if(window.innerWidth<600){
+            setNumOfMusicTiles(5);
+        }
+        else if(window.innerWidth<1200){
+            setNumOfMusicTiles(7);
+        }else{
+            setNumOfMusicTiles(9);
+        }
+        const handleResize = () => {
+            if(window.innerWidth<600){
+                setNumOfMusicTiles(3);
+            }
+            else if(window.innerWidth<1200){
+                setNumOfMusicTiles(5);
+            }else{
+                setNumOfMusicTiles(7);
+            }
+        };
+    
+        // Add event listener when component mounts
+        window.addEventListener('resize', handleResize);
+    
+        // Remove event listener when component unmounts
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, []); 
+
+    //Set Theme
     useEffect(()=>{
         const currentTheme = THEMES.find((theme)=>theme.name===selectedTheme);
         document.querySelector(':root').style.setProperty('--backgroundColor', currentTheme.colors.backgroundColor );
@@ -23,6 +54,11 @@ function MyMusic(){
         document.querySelector(':root').style.setProperty('--firstBoxShadow',currentTheme.colors.shadowColor1 );
         document.querySelector(':root').style.setProperty('--secondBoxShadow',currentTheme.colors.shadowColor2 );
     },[selectedTheme])
+
+    //Set number of cols
+    useEffect(()=>{
+        document.querySelector(':root').style.setProperty('--numOfMusicTileCols', numOfMusicTileCols );
+    },[numOfMusicTileCols])
 
     //Reset Animation on song change
     function handleSongChangeCallback(){
@@ -37,8 +73,6 @@ function MyMusic(){
     } 
 
     function getTileGrid(){
-        //SET ALL CSS VARIABLES
-        document.querySelector(':root').style.setProperty('--numOfMusicTileCols', numOfMusicTileCols );
         let tileArray = []
         for(let i=1;i<=numberOfMusicTiles;i++){
             tileArray.push(<MusicTile isPlaying={playSwitch}   tempo = {tempo} rowNumber = {Math.ceil(i/tileColNum)} tileNumber={i} key={i+"-music-tile"}></MusicTile>)
