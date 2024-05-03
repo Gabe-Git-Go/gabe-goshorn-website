@@ -82,7 +82,7 @@ function MyMusic(){
 
     return (
         <div id="hire-me-wrapper">
-            <MusicController themeChangeCallback={handleThemeChangeCallback} songChangeCallback={handleSongChangeCallback} allSongs={SONGS} allThemes={THEMES} tempo = {tempo}/>
+            <MusicController themeChangeCallback={handleThemeChangeCallback} songChangeCallback={handleSongChangeCallback} allSongs={SONGS} currentTheme={selectedTheme} allThemes={THEMES} tempo = {tempo}/>
             <div id="music-tile-wrapper" className=''>
                 {
                     musicTileArray

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import ListGroup from 'react-bootstrap/ListGroup';
 
-export default function MusicController({allThemes, allSongs,songChangeCallback, theme, themeChangeCallback}){
+export default function MusicController({allThemes, allSongs,songChangeCallback, currentTheme, themeChangeCallback}){
     const [selectedSong,setSelectedSong] = useState(allSongs[0].name)
     const [currSong,setCurrSong] = useState(new Audio(allSongs[0].audioFile))
     const [playSwitch, setPlaySwitch] = useState(false);
-    const [tempo, setTempo] = useState(allSongs[0].tempo)
+    const [tempo, setTempo] = useState(allSongs[0].tempo);
+    const [mobileSlideUp,setMobileSlideUp] = useState(false);
 
     //When play switch is changed, update the tile grid, and stop/start audio
     useEffect(()=>{
@@ -28,7 +29,7 @@ export default function MusicController({allThemes, allSongs,songChangeCallback,
         let themeOptions = [];
         allThemes.forEach((theme)=>{
             themeOptions.push(
-            <ListGroup.Item action className="themeList" variant="dark" key={theme.name} onClick={()=>themeChangeCallback(theme.name)}>
+            <ListGroup.Item action className={"themeList"+ (theme.name===currentTheme?' active':'')} variant="dark" key={theme.name} onClick={()=>themeChangeCallback(theme.name)}>
                 {theme.name}
             </ListGroup.Item>
             )
@@ -40,15 +41,17 @@ export default function MusicController({allThemes, allSongs,songChangeCallback,
         let songOptions = [];
         allSongs.forEach((song)=>{
             songOptions.push(
-                <ListGroup.Item action className="themeList" variant="dark" key={song.name} onClick={()=>setSelectedSong(song.name)}>
+                <ListGroup.Item action className={"themeList"+ (song.name===selectedSong?' active':'')} variant="dark" key={song.name} onClick={()=>setSelectedSong(song.name)}>
                     {song.name}
                 </ListGroup.Item>
             )
         })
         return songOptions;
     }
+    
     return (
-    <div className="music-ctrl-wrapper">
+    <div className={'music-ctrl-wrapper' + (mobileSlideUp?' mb-0 ':'')}>
+        <button onClick={()=>setMobileSlideUp(!mobileSlideUp)} className="mobile-more-btn">^</button>
         <img className='song-img music-ctrl' src={(allSongs.find((song)=>song.name===selectedSong)).imageUrl} alt="" />
         <span className="music-ctrl song-title">{selectedSong}</span>
         <div className=" music-ctrl play-pause-container">

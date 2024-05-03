@@ -4,7 +4,7 @@ export const THEMES : Theme[] = [
     {
         name: "Ocean Breeze",
         colors: {
-            backgroundColor: "#D6DBDF", // Light bluish gray
+            backgroundColor: "#D6DBB9", // Light bluish gray
             tileColor1: "#5DADE2",
             tileColor2: "#EAECEE",
             shadowColor1: "rgba(93, 173, 226, 0.5)",

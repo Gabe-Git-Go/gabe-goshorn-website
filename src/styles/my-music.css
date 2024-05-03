@@ -13,6 +13,7 @@
     --backgroundColor: black;
     --animationIterationCount : infinite;
     --appliedAnimations : colorChange, glow, pulsate;
+    --mobileSlideDirection : normal;
 }
 
 
@@ -110,6 +111,16 @@
     
 }
 
+@keyframes slideUp {
+    from{
+        margin-bottom:-333px;
+    }
+
+    to{
+        margin-bottom:0px;
+    }
+    
+}
 #music-tile-wrapper{
     display: grid;
     max-height: 100%;
@@ -159,9 +170,15 @@
     width: 125px;
     margin-top:30px;
 }
+.mb-0{
+    margin-bottom:0px;
+}
 
 @media (max-width: 500px) {
-
+    .music-ctrl-wrapper{
+        transition: all .3s ease-in-out;
+        margin-bottom:-333px;
+    }
     img.music-ctrl-btn{
         margin-top:15px;
         cursor: pointer;
@@ -177,12 +194,13 @@
     span.song-title{
         font-size:25px;
         max-height: 50px;
-        margin-top:35px !important;
+        margin-top:20px !important;
         margin-left:0px;
         padding-left:5px;
         padding-right:5px;
         overflow: hidden;
         width:60%;
+        line-height: 24px;
     }
     img.song-img{
         width:50px;
@@ -192,12 +210,29 @@
     .selector-wrapper > .selector{
         margin:0px;
     }
+    .selector-wrapper {
+        margin-top: 10px;
+    }
+    .mobile-more-btn{
+        display:initial !important;
+        border-radius: 5px;
+        border-bottom: none;
+        opacity:.75;
+        position: absolute;
+        width: 60px;
+        margin-top: -28px;
+        height: 28px;
+        margin-left: -32px;
+    }
+}
+.mobile-more-btn{
+    display: none;
 }
 
 .selector{
     margin-left: 25px;
     font-size: 25px;
-    max-height:180px;
+    max-height:150px;
     max-width: 400px;
     min-width: 300px;
     overflow-y: auto;
@@ -249,7 +284,7 @@
 
 
 .play-pause-container {
-    margin-top:45px;
+    margin-top:18px;
     margin-left: 60px;
     background: var(--backgroundColor);
     width: 100px;
