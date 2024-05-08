@@ -25,9 +25,13 @@
     width:100%;
 }
 .music-tile:hover{
-    filter: invert();
+    filter:brightness(.9);
 }
 
+.themeList input.form-check-input:checked{
+    background-color: var(--backgroundColor) !important;
+    filter: hue-rotate(202deg);
+}
 
 .animation > .music-tile{
     animation-name: var(--appliedAnimations);
@@ -70,29 +74,29 @@
 }
 
 
+.selector-animation-wrapper{
+    background: #e5dcdc;
+    padding-left:5px;
+}
+
+#selector-title-animation{
+    height:55px;
+    border-bottom: 5px;
+    border-color: black;
+    padding: 8px 16px;
+}
+
 .music-ctrl{
     position:sticky;
     float:left;
 }
-.music-ctrl-wrapper *{
-    animation-name: opacityChange;
-    animation-duration: .5s;
-    animation-direction:normal;
-    animation-timing-function: linear;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-}
-.music-ctrl-wrapper:hover *{
-    animation-name: opacityChange;
-    animation-duration: 2s;
-    animation-direction:reverse;
-    animation-timing-function: linear;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+.music-ctrl-wrapper:hover{
+    opacity:1;
 }
 
 
 .music-ctrl-wrapper{
+    opacity: .25;
     position:fixed;
     bottom: 0px;   
     left:0px;
@@ -100,6 +104,7 @@
     width:100%;
     color: black;
     padding:10px;
+    transition:all .3s ease-in-out;
 }
 .music-ctrl-btn{
     cursor: pointer;

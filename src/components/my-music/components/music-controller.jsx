@@ -13,7 +13,22 @@ export default function MusicController({allThemes, allAnimations, allSongs,song
     const [checkedAnimations,setCheckedAnimations] = useState(TILE_ANIMATIONS);
 
     useEffect(()=>{
-
+        let animationNames = '';
+        let animationDurations = '';
+        let animationIterationCounts = '';
+        let animationTimingFunctions = '';
+        checkedAnimations.forEach((animation)=>{
+            if(animation.isOn){
+                animationNames += ` ${animation.name},`;
+                animationDurations += ` ${animation.duration},`;
+                animationIterationCounts += ` ${animation.iterationCount},`;
+                animationTimingFunctions += ` ${animation.timingFunction},`;
+            }
+        })
+        document.querySelector(':root').style.setProperty('--appliedAnimations', animationNames.slice(0,animationNames.length-1) );
+        document.querySelector(':root').style.setProperty('--animationIterationCount', animationIterationCounts.slice(0,animationIterationCounts.length-1) );
+        document.querySelector(':root').style.setProperty('--animationDurations', animationDurations.slice(0,animationDurations.length-1) );
+        document.querySelector(':root').style.setProperty('--animationTimingFunction', animationTimingFunctions.slice(0,animationTimingFunctions.length-1) );
         return ()=>{
             //currSong.pause();
         }
@@ -56,7 +71,6 @@ export default function MusicController({allThemes, allAnimations, allSongs,song
                 animationTimingFunctions += ` ${animation.timingFunction},`;
             }
         })
-
         document.querySelector(':root').style.setProperty('--appliedAnimations', animationNames.slice(0,animationNames.length-1) );
         document.querySelector(':root').style.setProperty('--animationIterationCount', animationIterationCounts.slice(0,animationIterationCounts.length-1) );
         document.querySelector(':root').style.setProperty('--animationDurations', animationDurations.slice(0,animationDurations.length-1) );
@@ -94,9 +108,9 @@ export default function MusicController({allThemes, allAnimations, allSongs,song
                 key={animation.name}
                 type='checkbox'
                 name={animation.name}
-                className="themeList"
+                className="themeList "
                 id={animation.name}
-                label={animation.name}
+                label={animation.displayName}
                 checked={animation.isOn}
                 onChange={handleTileAnimationChange}
               />
@@ -124,8 +138,8 @@ export default function MusicController({allThemes, allAnimations, allSongs,song
                 <ListGroup.Item className="selector-title">Select Song</ListGroup.Item>
                 {getSongs()}
             </ListGroup>
-            <div className="selector">
-                <h6>Select Animations</h6>
+            <div className="selector selector-animation-wrapper">
+                <div id="selector-title-animation" className="selector-title">Select Animations</div>
                 {
                     getTileAnimations()
                 }

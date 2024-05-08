@@ -55,17 +55,6 @@
     }
 }
 
-@keyframes opacityChange {
-    from{
-        opacity: 1;
-    }
-
-    to{
-        opacity: .25;
-    }
-    
-}
-
 @keyframes slideUp {
     from{
         margin-bottom:-333px;

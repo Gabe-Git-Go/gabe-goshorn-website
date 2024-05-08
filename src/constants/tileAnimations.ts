@@ -44,7 +44,7 @@ export const TILE_ANIMATIONS: CssAnimation[]= [
     {
         displayName: 'Square to Circle',
         name: 'squareToCircle',
-        duration: 'calc(((60000ms * (1/var(--tempo))))*2)',
+        duration: 'calc(((60000ms * (1/var(--tempo)))))',
         iterationCount: 'infinite',
         timingFunction: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
         isOn: true

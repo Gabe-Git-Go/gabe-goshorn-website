@@ -16,29 +16,6 @@ function MyMusic(){
     const [musicTileArray,setTileArray] = useState(getTileGrid());
 
     useEffect(() => {
-        let animationNames = '';
-        let animationDurations = '';
-        let animationIterationCounts = '';
-        let animationTimingFunctions = '';
-        TILE_ANIMATIONS.forEach((animation,index)=>{
-            if(index!==(TILE_ANIMATIONS.length-1)){
-                animationNames += ` ${animation.name},`;
-                animationDurations += ` ${animation.duration},`;
-                animationIterationCounts += ` ${animation.iterationCount},`;
-                animationTimingFunctions += ` ${animation.timingFunction},`;
-            }else{
-                animationNames += ` ${animation.name}`;
-                animationDurations += ` ${animation.duration}`;
-                animationIterationCounts += ` ${animation.iterationCount}`;
-                animationTimingFunctions += ` ${animation.timingFunction}`;
-            }
-        })
-        
-        document.querySelector(':root').style.setProperty('--appliedAnimations', animationNames );
-        document.querySelector(':root').style.setProperty('--animationIterationCount', animationIterationCounts );
-        document.querySelector(':root').style.setProperty('--animationDurations', animationDurations );
-        document.querySelector(':root').style.setProperty('--animationTimingFunction', animationTimingFunctions );
-
         // Function to be called when window is resized
         document.getElementById("music-tile-wrapper").scrollIntoView();
         
