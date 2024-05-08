@@ -2,16 +2,6 @@ import {Theme} from '../models/theme'
 
 export const THEMES : Theme[] = [
     {
-        name: "Ocean Breeze",
-        colors: {
-            backgroundColor: "#D6DBB9", // Light bluish gray
-            tileColor1: "#5DADE2",
-            tileColor2: "#EAECEE",
-            shadowColor1: "rgba(93, 173, 226, 0.5)",
-            shadowColor2: "rgba(234, 236, 238, 0.5)"
-        }
-    },
-    {
         name: "Sunset Horizon",
         colors: {
             backgroundColor: "#FADBD8", // Light peach
@@ -99,6 +89,16 @@ export const THEMES : Theme[] = [
             tileColor2: "#FADBD8",
             shadowColor1: "rgba(215, 189, 226, 0.5)",
             shadowColor2: "rgba(250, 219, 216, 0.5)"
+        }
+    },
+    {
+        name: "Ocean Breeze",
+        colors: {
+            backgroundColor: "#D6DBB9", // Light bluish gray
+            tileColor1: "#5DADE2",
+            tileColor2: "#EAECEE",
+            shadowColor1: "rgba(93, 173, 226, 0.5)",
+            shadowColor2: "rgba(234, 236, 238, 0.5)"
         }
     }
 ];

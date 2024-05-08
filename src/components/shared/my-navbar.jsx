@@ -6,11 +6,11 @@ function MyNavbar(){
     <div id="my-nav-bar-wrapper">
       <ul id="my-nav-bar-list">
         <li><NavLink style={({ isActive }) => ({  
-                            color: isActive ? 'orange' : 'rgb(245, 205, 154)' })}  to="/">Home</NavLink></li>
+                            color: isActive ? 'orange' : 'rgb(146 145 142)' })}  to="/">Home</NavLink></li>
         <li><NavLink style={({ isActive }) => ({  
-                            color: isActive ? 'orange' : 'rgb(245, 205, 154)' })}  activeclassname="active" to="/music">Music</NavLink></li>
+                            color: isActive ? 'orange' : 'rgb(146 145 142)' })}  activeclassname="active" to="/music">Music</NavLink></li>
         <li><NavLink style={({ isActive }) => ({  
-                            color: isActive ? 'orange' : 'rgb(245, 205, 154)' })}  activeclassname="active" to="/hire-me">Hire Me</NavLink></li>
+                            color: isActive ? 'orange' : 'rgb(146 145 142)' })}  activeclassname="active" to="/hire-me">Hire Me</NavLink></li>
       </ul>
     </div>
   );

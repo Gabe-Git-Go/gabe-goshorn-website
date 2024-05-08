@@ -1,11 +1,11 @@
 import '../../styles/home.css';
-import '../../styles/my-music.css';
+import '../../styles/my-music/my-music.css';
 import MusicTile from "./components/music-tile.jsx";
 import MusicController from "./components/music-controller.jsx";
 import { useEffect, useRef, useState } from "react";
 import {THEMES} from "../../constants/themes.ts";
 import { SONGS } from '../../constants/songs.ts';
-
+import { TILE_ANIMATIONS } from '../../constants/tileAnimations.ts';
 function MyMusic(){
     const [numOfMusicTileCols,setNumOfMusicTiles] = useState(7);
     const [playSwitch, setPlaySwitch] = useState(false);
@@ -16,14 +16,39 @@ function MyMusic(){
     const [musicTileArray,setTileArray] = useState(getTileGrid());
 
     useEffect(() => {
+        let animationNames = '';
+        let animationDurations = '';
+        let animationIterationCounts = '';
+        let animationTimingFunctions = '';
+        TILE_ANIMATIONS.forEach((animation,index)=>{
+            if(index!==(TILE_ANIMATIONS.length-1)){
+                animationNames += ` ${animation.name},`;
+                animationDurations += ` ${animation.duration},`;
+                animationIterationCounts += ` ${animation.iterationCount},`;
+                animationTimingFunctions += ` ${animation.timingFunction},`;
+            }else{
+                animationNames += ` ${animation.name}`;
+                animationDurations += ` ${animation.duration}`;
+                animationIterationCounts += ` ${animation.iterationCount}`;
+                animationTimingFunctions += ` ${animation.timingFunction}`;
+            }
+        })
+        
+        document.querySelector(':root').style.setProperty('--appliedAnimations', animationNames );
+        document.querySelector(':root').style.setProperty('--animationIterationCount', animationIterationCounts );
+        document.querySelector(':root').style.setProperty('--animationDurations', animationDurations );
+        document.querySelector(':root').style.setProperty('--animationTimingFunction', animationTimingFunctions );
+
         // Function to be called when window is resized
+        document.getElementById("music-tile-wrapper").scrollIntoView();
+        
         if(window.innerWidth<600){
-            setNumOfMusicTiles(5);
+            setNumOfMusicTiles(3);
         }
         else if(window.innerWidth<1200){
-            setNumOfMusicTiles(7);
+            setNumOfMusicTiles(5);
         }else{
-            setNumOfMusicTiles(9);
+            setNumOfMusicTiles(7);
         }
         const handleResize = () => {
             if(window.innerWidth<600){
@@ -42,6 +67,7 @@ function MyMusic(){
         // Remove event listener when component unmounts
         return () => {
           window.removeEventListener('resize', handleResize);
+            
         };
       }, []); 
 
@@ -81,8 +107,8 @@ function MyMusic(){
     }
 
     return (
-        <div id="hire-me-wrapper">
-            <MusicController themeChangeCallback={handleThemeChangeCallback} songChangeCallback={handleSongChangeCallback} allSongs={SONGS} currentTheme={selectedTheme} allThemes={THEMES} tempo = {tempo}/>
+        <div id="my-music-wrapper">
+            <MusicController themeChangeCallback={handleThemeChangeCallback} songChangeCallback={handleSongChangeCallback} allTileAnimations={TILE_ANIMATIONS} allSongs={SONGS} currentTheme={selectedTheme} allThemes={THEMES} tempo = {tempo}/>
             <div id="music-tile-wrapper" className=''>
                 {
                     musicTileArray

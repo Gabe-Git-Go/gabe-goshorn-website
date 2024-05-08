@@ -1,4 +1,3 @@
-import AboutMe from "./home-page-components/about-me";
 import '../styles/home.css'
 export default function HireMe(){
 
