@@ -1,20 +1,48 @@
-import playBtn from '../../../assets/music-assets/music-ctrl-images/play_button.png'
-import playBtnPressed from '../../../assets/music-assets/music-ctrl-images/play_button_pressed.png'
-import pauseBtn from '../../../assets/music-assets/music-ctrl-images/pause_button.png'
-import pauseBtnPressed from '../../../assets/music-assets/music-ctrl-images/pause_button_pressed.png'
 import { useEffect, useState } from "react";
+import ListGroup from 'react-bootstrap/ListGroup';
+import Form from 'react-bootstrap/Form';
+import { TILE_ANIMATIONS } from "../../../constants/tileAnimations.ts";
 
-export default function MusicController({allThemes, allSongs,songChangeCallback, theme, themeChangeCallback}){
-    const [isPauseBtnPressed,setPauseBtnPressed] = useState(false);
+
+export default function MusicController({allThemes, allAnimations, allSongs,songChangeCallback, currentTheme, themeChangeCallback, animationChangeCallback}){
     const [selectedSong,setSelectedSong] = useState(allSongs[0].name)
     const [currSong,setCurrSong] = useState(new Audio(allSongs[0].audioFile))
     const [playSwitch, setPlaySwitch] = useState(false);
-    const [tempo, setTempo] = useState(allSongs[0].tempo)
+    const [tempo, setTempo] = useState(allSongs[0].tempo);
+    const [mobileSlideUp,setMobileSlideUp] = useState(false);
+    const [checkedAnimations,setCheckedAnimations] = useState(TILE_ANIMATIONS);
+
+    useEffect(()=>{
+        let animationNames = '';
+        let animationDurations = '';
+        let animationIterationCounts = '';
+        let animationTimingFunctions = '';
+        checkedAnimations.forEach((animation)=>{
+            if(animation.isOn){
+                animationNames += ` ${animation.name},`;
+                animationDurations += ` ${animation.duration},`;
+                animationIterationCounts += ` ${animation.iterationCount},`;
+                animationTimingFunctions += ` ${animation.timingFunction},`;
+            }
+        })
+        document.querySelector(':root').style.setProperty('--appliedAnimations', animationNames.slice(0,animationNames.length-1) );
+        document.querySelector(':root').style.setProperty('--animationIterationCount', animationIterationCounts.slice(0,animationIterationCounts.length-1) );
+        document.querySelector(':root').style.setProperty('--animationDurations', animationDurations.slice(0,animationDurations.length-1) );
+        document.querySelector(':root').style.setProperty('--animationTimingFunction', animationTimingFunctions.slice(0,animationTimingFunctions.length-1) );
+        return ()=>{
+            //currSong.pause();
+        }
+    })
+
+    useEffect(()=>{
+
+    },[checkedAnimations])
 
     //When play switch is changed, update the tile grid, and stop/start audio
     useEffect(()=>{
         document.getElementById('music-tile-wrapper').className = document.getElementById('music-tile-wrapper').className.replace(playSwitch?'paused':'play','');
         document.getElementById('music-tile-wrapper').className += ` ${playSwitch?'play':'paused'}`;
+        playSwitch? currSong.play() : currSong.pause();
     },[playSwitch])
 
     useEffect(()=>{
@@ -27,46 +55,97 @@ export default function MusicController({allThemes, allSongs,songChangeCallback,
         setPlaySwitch(false);
     },[selectedSong])
 
-
-    function switchPlay(isOn){
-        if(!isOn){
-            setPauseBtnPressed(true);
-            setTimeout(()=>{
-                setPauseBtnPressed(false);
-            },500)
-        }
-        setPlaySwitch(isOn);  
+    function handleTileAnimationChange(event){
+        let animationNames = '';
+        let animationDurations = '';
+        let animationIterationCounts = '';
+        let animationTimingFunctions = '';
+        const updatedCheckedAnimations = checkedAnimations.map((animation)=>{
+            return animation.name === event.target.name ? { ...animation, isOn: !animation.isOn } : animation
+        });
+        updatedCheckedAnimations.forEach((animation)=>{
+            if(animation.isOn){
+                animationNames += ` ${animation.name},`;
+                animationDurations += ` ${animation.duration},`;
+                animationIterationCounts += ` ${animation.iterationCount},`;
+                animationTimingFunctions += ` ${animation.timingFunction},`;
+            }
+        })
+        document.querySelector(':root').style.setProperty('--appliedAnimations', animationNames.slice(0,animationNames.length-1) );
+        document.querySelector(':root').style.setProperty('--animationIterationCount', animationIterationCounts.slice(0,animationIterationCounts.length-1) );
+        document.querySelector(':root').style.setProperty('--animationDurations', animationDurations.slice(0,animationDurations.length-1) );
+        document.querySelector(':root').style.setProperty('--animationTimingFunction', animationTimingFunctions.slice(0,animationTimingFunctions.length-1) );
+        setCheckedAnimations(updatedCheckedAnimations);
     }
 
     function getThemes(){
         let themeOptions = [];
         allThemes.forEach((theme)=>{
-            themeOptions.push(<option key={theme.name} value={theme.name}>{theme.name}</option>)
+            themeOptions.push(
+            <ListGroup.Item action className={"themeList"+ (theme.name===currentTheme?' active':'')} variant="dark" key={theme.name} onClick={()=>themeChangeCallback(theme.name)}>
+                {theme.name}
+            </ListGroup.Item>
+            )
         })
         return themeOptions;
     }
     function getSongs(){
         let songOptions = [];
         allSongs.forEach((song)=>{
-            songOptions.push(<option key={song.name} value={song.name}>{song.name}</option>)
+            songOptions.push(
+                <ListGroup.Item action className={"themeList"+ (song.name===selectedSong?' active':'')} variant="dark" key={song.name} onClick={()=>setSelectedSong(song.name)}>
+                    {song.name}
+                </ListGroup.Item>
+            )
         })
         return songOptions;
     }
+    function getTileAnimations(){
+        let tileAnimationOptions = [];
+        checkedAnimations.forEach((animation)=>{
+            tileAnimationOptions.push(
+                <Form.Check 
+                key={animation.name}
+                type='checkbox'
+                name={animation.name}
+                className="themeList "
+                id={animation.name}
+                label={animation.displayName}
+                checked={animation.isOn}
+                onChange={handleTileAnimationChange}
+              />
+            )
+        })
+        return tileAnimationOptions;
+    }
+    
     return (
-        <div className="music-ctrl-wrapper">
-        <img className={"music-ctrl"} id= "play-btn" onClick={ () =>switchPlay(true)} src={playSwitch?playBtnPressed:playBtn} alt="Play Button" />
-        <img className={"music-ctrl"} id = "pause-btn" onClick={ () =>switchPlay(false)} src={isPauseBtnPressed?pauseBtnPressed:pauseBtn} alt="Pause Buttton" />
-        <span className="music-ctrl song-title">N o w P la ying...</span>
-        <label htmlFor="themeSelector">
-            <select value={theme} onChange={e => themeChangeCallback(e.target.value)} name="themeSelector" id="">
+    <div className={'music-ctrl-wrapper' + (mobileSlideUp?' mb-0 ':'')}>
+        <button onClick={()=>setMobileSlideUp(!mobileSlideUp)} className="mobile-more-btn">^</button>
+        <img className='song-img music-ctrl' src={(allSongs.find((song)=>song.name===selectedSong)).imageUrl} alt="" />
+        <span className="music-ctrl song-title">{selectedSong}</span>
+        <div className=" music-ctrl play-pause-container">
+            <input checked={!playSwitch} onChange={()=>setPlaySwitch(!playSwitch)} type="checkbox" className="playpause-chk"  id="chkbx"/>
+            <label htmlFor="chkbx"></label>
+        </div>
+
+        <div className='selector-wrapper'>
+            <ListGroup className='selector'>
+                <ListGroup.Item className="selector-title">Select Theme</ListGroup.Item>
                 {getThemes()}
-            </select>
-        </label>
-        <label htmlFor="songSelector">
-            <select value={selectedSong} onChange={e => setSelectedSong(e.target.value)} name="songSelector" id="">
+            </ListGroup>
+            <ListGroup className="selector">
+                <ListGroup.Item className="selector-title">Select Song</ListGroup.Item>
                 {getSongs()}
-            </select>
-        </label>
+            </ListGroup>
+            <div className="selector selector-animation-wrapper">
+                <div id="selector-title-animation" className="selector-title">Select Animations</div>
+                {
+                    getTileAnimations()
+                }
+            </div>
+                
+        </div>
     </div>
     )
 }

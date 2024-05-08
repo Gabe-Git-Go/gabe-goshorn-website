@@ -10,3 +10,11 @@
 .heading-2{
     margin-bottom: 15px;
 }
+#about-me-text{
+    width: 85%;
+    float: inline-start;
+}
+.inline-picture{
+    display: inline-block;
+    height:500px;
+}
