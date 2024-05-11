@@ -31,7 +31,7 @@ export const TILE_ANIMATIONS: CssAnimation[]= [
         duration: 'calc(((60000ms * (1/var(--tempo))))*2)',
         iterationCount: 'infinite',
         timingFunction: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
-        isOn: true
+        isOn: false
     },
     {
         displayName: 'Slide right -> left',
@@ -39,14 +39,14 @@ export const TILE_ANIMATIONS: CssAnimation[]= [
         duration: 'calc(((60000ms * (1/var(--tempo))))*2)',
         iterationCount: 'infinite',
         timingFunction: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
-        isOn: true
+        isOn: false
     },
     {
         displayName: 'Square to Circle',
         name: 'squareToCircle',
         duration: 'calc(((60000ms * (1/var(--tempo)))))',
         iterationCount: 'infinite',
-        timingFunction: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
-        isOn: true
+        timingFunction: 'linear',
+        isOn: false
     }
 ]

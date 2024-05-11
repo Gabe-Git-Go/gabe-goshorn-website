@@ -11,7 +11,6 @@ function MyMusic(){
     const [playSwitch, setPlaySwitch] = useState(false);
     const [numberOfMusicTiles,setNumberOfMusicTiles] = useState(100);
     const [selectedTheme,setSelectedTheme] = useState(THEMES[0].name);
-    const [tileColNum,setTileColNum] = useState(6);
     const [tempo,setTempo] = useState(80)
     const [musicTileArray,setTileArray] = useState(getTileGrid());
 
@@ -20,7 +19,7 @@ function MyMusic(){
         document.getElementById("music-tile-wrapper").scrollIntoView();
         
         if(window.innerWidth<600){
-            setNumOfMusicTiles(3);
+            setNumOfMusicTiles(5);
         }
         else if(window.innerWidth<1200){
             setNumOfMusicTiles(5);
@@ -29,7 +28,7 @@ function MyMusic(){
         }
         const handleResize = () => {
             if(window.innerWidth<600){
-                setNumOfMusicTiles(3);
+                setNumOfMusicTiles(5);
             }
             else if(window.innerWidth<1200){
                 setNumOfMusicTiles(5);
@@ -78,7 +77,7 @@ function MyMusic(){
     function getTileGrid(){
         let tileArray = []
         for(let i=1;i<=numberOfMusicTiles;i++){
-            tileArray.push(<MusicTile isPlaying={playSwitch}   tempo = {tempo} rowNumber = {Math.ceil(i/tileColNum)} tileNumber={i} key={i+"-music-tile"}></MusicTile>)
+            tileArray.push(<MusicTile key={i+"-music-tile"}></MusicTile>)
         }
         return tileArray;
     }

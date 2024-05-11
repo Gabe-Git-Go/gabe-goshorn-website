@@ -2,6 +2,16 @@ import {Theme} from '../models/theme'
 
 export const THEMES : Theme[] = [
     {
+        name: "Mystic Night",
+        colors: {
+            backgroundColor: "#EAEDED", // Light steel blue
+            tileColor1: "#85929E",
+            tileColor2: "#2C3E50",
+            shadowColor1: "rgba(133, 146, 158, 0.5)",
+            shadowColor2: "rgba(44, 62, 80, 0.5)"
+        }
+    },
+    {
         name: "Sunset Horizon",
         colors: {
             backgroundColor: "#FADBD8", // Light peach
@@ -12,7 +22,7 @@ export const THEMES : Theme[] = [
         }
     },
     {
-        name: "Forest Canopy",
+        name: "Mint",
         colors: {
             backgroundColor: "#D0ECE7", // Light mint
             tileColor1: "#82E0AA",
@@ -49,16 +59,6 @@ export const THEMES : Theme[] = [
             tileColor2: "#EBF5FB",
             shadowColor1: "rgba(174, 214, 241, 0.5)",
             shadowColor2: "rgba(235, 245, 251, 0.5)"
-        }
-    },
-    {
-        name: "Mystic Night",
-        colors: {
-            backgroundColor: "#EAEDED", // Light steel blue
-            tileColor1: "#85929E",
-            tileColor2: "#2C3E50",
-            shadowColor1: "rgba(133, 146, 158, 0.5)",
-            shadowColor2: "rgba(44, 62, 80, 0.5)"
         }
     },
     {
