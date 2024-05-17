@@ -3,9 +3,9 @@ import '../../styles/my-music/my-music.css';
 import MusicTile from "./components/music-tile.jsx";
 import MusicController from "./components/music-controller.jsx";
 import { useEffect, useRef, useState } from "react";
-import {THEMES} from "../../constants/themes.ts";
-import { SONGS } from '../../constants/songs.ts';
-import { TILE_ANIMATIONS } from '../../constants/tileAnimations.ts';
+import {THEMES} from "../../constants/music/themes.ts";
+import { SONGS } from '../../constants/music/songs.ts';
+import {TILE_ANIMATIONS} from '../../constants/music/tileAnimations.ts'
 function MyMusic(){
     const [numOfMusicTileCols,setNumOfMusicTiles] = useState(7);
     const [playSwitch, setPlaySwitch] = useState(false);

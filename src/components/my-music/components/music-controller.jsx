@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
-import { TILE_ANIMATIONS } from "../../../constants/tileAnimations.ts";
+import { TILE_ANIMATIONS } from "../../../constants/music/tileAnimations.ts";
 import { FaVolumeUp } from "react-icons/fa";
 import { FaVolumeMute } from "react-icons/fa";
 
@@ -17,22 +17,6 @@ export default function MusicController({ allThemes, allAnimations, allSongs, so
     const [volume, setVolume] = useState(1);
 
     useEffect(() => {
-        let animationNames = '';
-        let animationDurations = '';
-        let animationIterationCounts = '';
-        let animationTimingFunctions = '';
-        checkedAnimations.forEach((animation) => {
-            if (animation.isOn) {
-                animationNames += ` ${animation.name},`;
-                animationDurations += ` ${animation.duration},`;
-                animationIterationCounts += ` ${animation.iterationCount},`;
-                animationTimingFunctions += ` ${animation.timingFunction},`;
-            }
-        })
-        document.querySelector(':root').style.setProperty('--appliedAnimations', animationNames.slice(0, animationNames.length - 1));
-        document.querySelector(':root').style.setProperty('--animationIterationCount', animationIterationCounts.slice(0, animationIterationCounts.length - 1));
-        document.querySelector(':root').style.setProperty('--animationDurations', animationDurations.slice(0, animationDurations.length - 1));
-        document.querySelector(':root').style.setProperty('--animationTimingFunction', animationTimingFunctions.slice(0, animationTimingFunctions.length - 1));
         return () => {
             currSong.pause();
         }
@@ -59,26 +43,33 @@ export default function MusicController({ allThemes, allAnimations, allSongs, so
         setPlaySwitch(false);
     }, [selectedSong])
 
+    useEffect(()=>{
+        const appliedNormalAnimationsArr = checkedAnimations.filter(animation => (animation.isOn&&!animation.transformSequence));
+
+        const appliedAnimations = appliedNormalAnimationsArr.map(animation => animation.name).concat(['combinedTransforms']).join(', ');
+        const animationIterationCount = appliedNormalAnimationsArr.map(animation => animation.iterationCount).concat(['infinite']).join(', ');
+        const animationDurations = appliedNormalAnimationsArr.map(animation => animation.duration).concat(['calc(((60000ms * (1/var(--tempo))))*2)']).join(', ');
+        const animationTimingFunction = appliedNormalAnimationsArr.map(animation => animation.timingFunction).concat(['cubic-bezier(0.165, 0.84, 0.44, 1)']).join(', ');
+        
+        const combinedTransformArr = checkedAnimations.filter(animation => (animation.isOn&&animation.transformSequence));
+
+        const combinedTransformStart = combinedTransformArr.map(animation => animation.transformSequence.start).join(' ');
+        const combinedTransformMiddle = combinedTransformArr.map(animation => animation.transformSequence.middle).join(' ');
+        const combinedTransformEnd = combinedTransformArr.map(animation => animation.transformSequence.end).join(' ');   
+
+        document.querySelector(':root').style.setProperty('--combinedTransformStart', combinedTransformStart);
+        document.querySelector(':root').style.setProperty('--combinedTransformMiddle', combinedTransformMiddle);
+        document.querySelector(':root').style.setProperty('--combinedTransformEnd', combinedTransformEnd);
+        document.querySelector(':root').style.setProperty('--appliedAnimations', appliedAnimations);
+        document.querySelector(':root').style.setProperty('--animationIterationCount', animationIterationCount);
+        document.querySelector(':root').style.setProperty('--animationDurations', animationDurations);
+        document.querySelector(':root').style.setProperty('--animationTimingFunction', animationTimingFunction);
+    },[checkedAnimations])
+
     function handleTileAnimationChange(event) {
-        let animationNames = '';
-        let animationDurations = '';
-        let animationIterationCounts = '';
-        let animationTimingFunctions = '';
         const updatedCheckedAnimations = checkedAnimations.map((animation) => {
             return animation.name === event.target.name ? { ...animation, isOn: !animation.isOn } : animation
         });
-        updatedCheckedAnimations.forEach((animation) => {
-            if (animation.isOn) {
-                animationNames += ` ${animation.name},`;
-                animationDurations += ` ${animation.duration},`;
-                animationIterationCounts += ` ${animation.iterationCount},`;
-                animationTimingFunctions += ` ${animation.timingFunction},`;
-            }
-        })              
-        document.querySelector(':root').style.setProperty('--appliedAnimations', animationNames.slice(0, animationNames.length - 1));
-        document.querySelector(':root').style.setProperty('--animationIterationCount', animationIterationCounts.slice(0, animationIterationCounts.length - 1));
-        document.querySelector(':root').style.setProperty('--animationDurations', animationDurations.slice(0, animationDurations.length - 1));
-        document.querySelector(':root').style.setProperty('--animationTimingFunction', animationTimingFunctions.slice(0, animationTimingFunctions.length - 1));
         setCheckedAnimations(updatedCheckedAnimations);
     }
 
@@ -133,7 +124,7 @@ export default function MusicController({ allThemes, allAnimations, allSongs, so
                 <label htmlFor="chkbx"></label>
             </div>
             <div className="volume-wrapper">
-                {volume > 0 ? <FaVolumeUp className="volume-icon" /> : <FaVolumeMute />}
+                {volume > 0 ? <FaVolumeUp onClick={()=>setVolume(0)} className="volume-icon" /> : <FaVolumeMute onClick={()=>setVolume(.5)}  className="volume-icon" />}
                 <div className="volume-range-wrapper">
                     <input
                         type="range"

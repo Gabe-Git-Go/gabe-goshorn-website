@@ -96,7 +96,9 @@
     float:left;
     width: 45px;
     height: 45px;
+    cursor: pointer;
 }
+
 #volume-range{
     filter: hue-rotate(18deg);
 }

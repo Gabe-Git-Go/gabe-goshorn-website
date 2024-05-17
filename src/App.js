@@ -1,10 +1,10 @@
 import './App.css';
-import Home from './components/home';
 import Header from './components/shared/header';
 import {BrowserRouter, Routes, Route, Outlet} from 'react-router-dom'
 import './styles/shared.css'
 import MyMusic from './components/my-music/my-music';
 import HireMe from './components/hire-me';
+import Home from './components/home-page-components/home';
 
 // document.onmousemove = handleMouseMove;
 // function handleMouseMove(event) {
@@ -43,10 +43,10 @@ import HireMe from './components/hire-me';
 // }
 function App() {
   return (
-    <div className="App">
-      <style>
-        @import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
-      </style>
+    <div className="App josefin-sans-fancy">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Jacquard+12&family=Jersey+15&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+  </style>
     <BrowserRouter >
       <Header/>
       <Routes>
