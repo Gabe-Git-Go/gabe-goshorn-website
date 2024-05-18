@@ -8,7 +8,6 @@ import { SONGS } from '../../constants/music/songs.ts';
 import {TILE_ANIMATIONS} from '../../constants/music/tileAnimations.ts'
 function MyMusic(){
     const [numOfMusicTileCols,setNumOfMusicTiles] = useState(7);
-    const [playSwitch, setPlaySwitch] = useState(false);
     const [numberOfMusicTiles,setNumberOfMusicTiles] = useState(100);
     const [selectedTheme,setSelectedTheme] = useState(THEMES[0].name);
     const [tempo,setTempo] = useState(80)
@@ -43,7 +42,6 @@ function MyMusic(){
         // Remove event listener when component unmounts
         return () => {
           window.removeEventListener('resize', handleResize);
-            
         };
       }, []); 
 

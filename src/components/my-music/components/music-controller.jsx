@@ -20,7 +20,7 @@ export default function MusicController({ allThemes, allAnimations, allSongs, so
         return () => {
             currSong.pause();
         }
-    }, [ currSong])
+    }, [currSong])
 
     useEffect(() => {
         currSong.volume = volume;
@@ -43,19 +43,19 @@ export default function MusicController({ allThemes, allAnimations, allSongs, so
         setPlaySwitch(false);
     }, [selectedSong])
 
-    useEffect(()=>{
-        const appliedNormalAnimationsArr = checkedAnimations.filter(animation => (animation.isOn&&!animation.transformSequence));
+    useEffect(() => {
+        const appliedNormalAnimationsArr = checkedAnimations.filter(animation => (animation.isOn && !animation.transformSequence));
 
         const appliedAnimations = appliedNormalAnimationsArr.map(animation => animation.name).concat(['combinedTransforms']).join(', ');
         const animationIterationCount = appliedNormalAnimationsArr.map(animation => animation.iterationCount).concat(['infinite']).join(', ');
         const animationDurations = appliedNormalAnimationsArr.map(animation => animation.duration).concat(['calc(((60000ms * (1/var(--tempo))))*2)']).join(', ');
         const animationTimingFunction = appliedNormalAnimationsArr.map(animation => animation.timingFunction).concat(['cubic-bezier(0.165, 0.84, 0.44, 1)']).join(', ');
-        
-        const combinedTransformArr = checkedAnimations.filter(animation => (animation.isOn&&animation.transformSequence));
+
+        const combinedTransformArr = checkedAnimations.filter(animation => (animation.isOn && animation.transformSequence));
 
         const combinedTransformStart = combinedTransformArr.map(animation => animation.transformSequence.start).join(' ');
         const combinedTransformMiddle = combinedTransformArr.map(animation => animation.transformSequence.middle).join(' ');
-        const combinedTransformEnd = combinedTransformArr.map(animation => animation.transformSequence.end).join(' ');   
+        const combinedTransformEnd = combinedTransformArr.map(animation => animation.transformSequence.end).join(' ');
 
         document.querySelector(':root').style.setProperty('--combinedTransformStart', combinedTransformStart);
         document.querySelector(':root').style.setProperty('--combinedTransformMiddle', combinedTransformMiddle);
@@ -64,7 +64,7 @@ export default function MusicController({ allThemes, allAnimations, allSongs, so
         document.querySelector(':root').style.setProperty('--animationIterationCount', animationIterationCount);
         document.querySelector(':root').style.setProperty('--animationDurations', animationDurations);
         document.querySelector(':root').style.setProperty('--animationTimingFunction', animationTimingFunction);
-    },[checkedAnimations])
+    }, [checkedAnimations])
 
     function handleTileAnimationChange(event) {
         const updatedCheckedAnimations = checkedAnimations.map((animation) => {
@@ -77,7 +77,7 @@ export default function MusicController({ allThemes, allAnimations, allSongs, so
         let themeOptions = [];
         allThemes.forEach((theme) => {
             themeOptions.push(
-                <ListGroup.Item action className={"themeList" + (theme.name === currentTheme ? ' active' : '')} variant="dark" key={theme.name} onClick={() => themeChangeCallback(theme.name)}>
+                <ListGroup.Item action className={"selectorList" + (theme.name === currentTheme ? ' active' : '')} variant="dark" key={theme.name} onClick={() => themeChangeCallback(theme.name)}>
                     {theme.name}
                 </ListGroup.Item>
             )
@@ -88,7 +88,7 @@ export default function MusicController({ allThemes, allAnimations, allSongs, so
         let songOptions = [];
         allSongs.forEach((song) => {
             songOptions.push(
-                <ListGroup.Item action className={"themeList" + (song.name === selectedSong ? ' active' : '')} variant="dark" key={song.name} onClick={() => setSelectedSong(song.name)}>
+                <ListGroup.Item action className={"selectorList" + (song.name === selectedSong ? ' active' : '')} variant="dark" key={song.name} onClick={() => setSelectedSong(song.name)}>
                     {song.name}
                 </ListGroup.Item>
             )
@@ -103,7 +103,7 @@ export default function MusicController({ allThemes, allAnimations, allSongs, so
                     key={animation.name}
                     type='checkbox'
                     name={animation.name}
-                    className="themeList "
+                    className="selectorList br-0"
                     id={animation.name}
                     label={animation.displayName}
                     checked={animation.isOn}
@@ -115,44 +115,54 @@ export default function MusicController({ allThemes, allAnimations, allSongs, so
     }
 
     return (
-        <div className={'music-ctrl-wrapper' + (mobileSlideUp ? ' mb-0 ' : '')}>
+        <div id="music-animation-ctrl-wrapper" className={(mobileSlideUp ? ' mb-0 ' : '')}>
             <button onClick={() => setMobileSlideUp(!mobileSlideUp)} className="mobile-more-btn">^</button>
-            <img className='song-img music-ctrl' src={(allSongs.find((song) => song.name === selectedSong)).imageUrl} alt="" />
-            <span className="music-ctrl song-title">{selectedSong}</span>
-            <div className=" music-ctrl play-pause-container">
-                <input checked={!playSwitch} onChange={() => setPlaySwitch(!playSwitch)} type="checkbox" className="playpause-chk" id="chkbx" />
-                <label htmlFor="chkbx"></label>
-            </div>
-            <div className="volume-wrapper">
-                {volume > 0 ? <FaVolumeUp onClick={()=>setVolume(0)} className="volume-icon" /> : <FaVolumeMute onClick={()=>setVolume(.5)}  className="volume-icon" />}
-                <div className="volume-range-wrapper">
-                    <input
-                        type="range"
-                        id="volume-range"
-                        min={0}
-                        max={1}
-                        step={0.02}
-                        value={volume}
-                        onChange={event => {
-                            setVolume(event.target.valueAsNumber)
-                        }}
-                    />
+            <div id="music-ctrl-wrapper">
+                <img className='song-img music-ctrl' src={(allSongs.find((song) => song.name === selectedSong)).imageUrl} alt="" />
+                <span className="music-ctrl song-title">{selectedSong}</span>
+                <div className=" music-ctrl play-pause-container">
+                    <input checked={!playSwitch} onChange={() => setPlaySwitch(!playSwitch)} type="checkbox" className="playpause-chk" id="chkbx" />
+                    <label htmlFor="chkbx"></label>
+                </div>
+                <div className="volume-wrapper">
+                    {volume > 0 ? <FaVolumeUp onClick={() => setVolume(0)} className="volume-icon" /> : <FaVolumeMute onClick={() => setVolume(.5)} className="volume-icon" />}
+                    <div className="volume-range-wrapper">
+                        <input
+                            type="range"
+                            id="volume-range"
+                            min={0}
+                            max={1}
+                            step={0.02}
+                            value={volume}
+                            onChange={event => {
+                                setVolume(event.target.valueAsNumber)
+                            }}
+                        />
+                    </div>
                 </div>
             </div>
             <div className='selector-wrapper'>
-                <ListGroup className='selector'>
-                    <ListGroup.Item className="selector-title">Select Theme</ListGroup.Item>
-                    {getThemes()}
-                </ListGroup>
-                <ListGroup className="selector">
-                    <ListGroup.Item className="selector-title">Select Song</ListGroup.Item>
-                    {getSongs()}
-                </ListGroup>
-                <div className="selector selector-animation-wrapper">
+                <div className="selector-list-wrapper">
+                    <div className="selector-title">Select Theme</div>
+                    <ListGroup className='selector'>
+                        {getThemes()}
+                    </ListGroup>
+                </div>
+                <div className="selector-list-wrapper">
+                    <div className="selector-title">Select Song</div>
+                    <ListGroup className="selector">
+                        {getSongs()}
+                    </ListGroup>
+                </div>
+                <div className="selector-list-wrapper">
                     <div id="selector-title-animation" className="selector-title">Select Animations</div>
-                    {
-                        getTileAnimations()
-                    }
+                    <div className="selector">
+                        <div className="selector-animation-wrapper">
+                            {
+                                getTileAnimations()
+                            }
+                        </div>
+                    </div>
                 </div>
 
             </div>
