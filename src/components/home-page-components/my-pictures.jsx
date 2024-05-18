@@ -44,6 +44,7 @@ export default function MyPictures() {
 
     return (
         <div id="my-picture-pile">
+            <h1>Pictures of Me</h1>
             <button className="left-arrow-btn" onClick={() => handleSwipe('right')}>&lt;</button>
             <button className="right-arrow-btn" onClick={() => handleSwipe('left')}>&gt;</button>
             <div id='my-pictures-wrapper' className="stacked-images">

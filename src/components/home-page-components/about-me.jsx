@@ -1,7 +1,7 @@
 export default function AboutMe(){
     return (
         <div id= 'about-me-wrapper'>
-            <h2 className="heading-2">About Me</h2>
+            <h1 className="heading-2">About Me</h1>
             <p id="about-me-text">
                 Hi, my name is Gabriel Goshorn but you can call me Gabe. I am originally from central Pennsylvania, but these days I live relatively close to Seattle, Washington.
                 I have always grown up with a fascination of music and just general problem solving. Going through grade school I would participate in my school's marching band, jazz bands and

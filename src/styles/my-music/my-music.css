@@ -278,7 +278,7 @@
 }
 
 
-@media (max-width:2080px) and (min-width:900px) {
+@media (max-width:2080px) and (min-width:628px) {
     .selector-wrapper,
     #music-ctrl-wrapper{
         margin:auto;
@@ -298,9 +298,44 @@
         height: 40px;
     }
 }
+@media (max-width:1010px) and (min-width:628px)  {
+    #music-ctrl-wrapper{
+        width:auto;
+    }
+    #music-animation-ctrl-wrapper{
+        margin-bottom: -407px;
+    }
+    .song-title {
+        font-size: 30px;
+        margin-top:50px;
+    }
+    div.play-pause-container{
+        margin-left: 10px;
+        margin-top:35px;
+        cursor: pointer;
+        width: 70px;
+        height: 70px;
+    }
+    img.music-ctrl-btn{
+        margin-top:15px;
+        cursor: pointer;
+        width: 64px;
+    }
+    img.song-img{
+        width:100px;
+        height:100px;
+        margin: 20px 20px 0px 5px;
+    }
+    #music-ctrl-wrapper{
+        float: left;
+    }
+    .volume-wrapper{
+        margin-top:40px;
+    }
+}
 
 
-@media (max-width: 500px) {
+@media (max-width: 628px) {
     #music-ctrl-wrapper{
         width:auto;
     }
