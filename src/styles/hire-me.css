@@ -18,4 +18,10 @@
 .contact-form{
     padding-left:1em;
     padding-right:1em;
+    max-width: 681px;
+    margin: auto;
+}
+
+.contact-submit-btn{
+    background-color: antiquewhite;
 }
