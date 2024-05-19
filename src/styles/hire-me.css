@@ -20,8 +20,15 @@
     padding-right:1em;
     max-width: 681px;
     margin: auto;
+    margin-bottom:20px;
 }
 
 .contact-submit-btn{
     background-color: antiquewhite;
+}
+
+
+#hire-me-wrapper{
+/* ViewPort Height - footer - header*/
+    min-height:calc(100vh - 57px - 199px);
 }

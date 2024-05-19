@@ -1,10 +1,11 @@
 import './App.css';
 import Header from './components/shared/header';
 import {BrowserRouter, Routes, Route, Outlet} from 'react-router-dom'
-import './styles/shared.css'
+import './styles/shared/shared.css'
 import MyMusic from './components/my-music/my-music';
 import HireMe from './components/hire-me';
 import Home from './components/home-page-components/home';
+import Footer from './components/shared/footer';
 
 // document.onmousemove = handleMouseMove;
 // function handleMouseMove(event) {
@@ -56,6 +57,7 @@ function App() {
       </Routes>
       </BrowserRouter>
       <Outlet/>
+      <Footer/>
     </div>
   );
 }

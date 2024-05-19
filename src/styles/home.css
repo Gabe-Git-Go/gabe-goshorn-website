@@ -179,6 +179,8 @@
         height: 800px;
         width: auto;
         margin: auto;
+        margin-bottom:250px;
+
         transition: all 1s ease-in-out;
 
     }
