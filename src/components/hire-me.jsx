@@ -25,7 +25,7 @@ export default function HireMe() {
                     I already have plenty of experience with frontend web technologies, I would love to find a position working with a relational database of some sort.
                     I do already have some trainings dealing with Java springboot and MongoDB however I am always open to learning new technologies. Please take a look at my resume and feel free to contact me.
                     </p>
-                <p>Take my Resume here - > <a className='resume' href={myResume} download="Resume_Gabriel_Goshorn_Current.pdf">Download Resume</a></p>
+                <p>Take my Resume here - {'>'} <a className='resume' href={myResume} download="Resume_Gabriel_Goshorn_Current.pdf">Download Resume</a></p>
             </div>
             <hr />
             <Form className='contact-form' noValidate validated={validated} onSubmit={handleSubmit}>
