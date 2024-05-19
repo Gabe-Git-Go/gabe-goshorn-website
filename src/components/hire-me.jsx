@@ -21,7 +21,7 @@ export default function HireMe() {
         <div id="hire-me-wrapper">
             <div>
                 <h1>What I am Looking For</h1>
-                <p>I am looking for a position that would challenge me in new ways, and continue my learnings in my goal of becoming a full stack developer. 
+                <p className='p-1'>I am looking for a position that would challenge me in new ways, and continue my learnings in my goal of becoming a full stack developer. 
                     I already have plenty of experience with frontend web technologies, I would love to find a position working with a relational database of some sort.
                     I do already have some trainings dealing with Java springboot and MongoDB however I am always open to learning new technologies. Please take a look at my resume and feel free to contact me.
                     </p>
