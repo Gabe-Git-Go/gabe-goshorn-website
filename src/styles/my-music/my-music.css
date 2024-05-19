@@ -337,7 +337,7 @@
 
 @media (max-width: 628px) {
     #music-ctrl-wrapper{
-        width:auto;
+        width:100%;
     }
     #music-animation-ctrl-wrapper{
         transition: all .3s ease-in-out;
