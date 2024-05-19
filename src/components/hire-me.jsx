@@ -1,4 +1,4 @@
-import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap'
+import { Button, Col, Form, Row } from 'react-bootstrap'
 import '../styles/home.css'
 import '../styles/hire-me.css'
 import myResume from '../assets/hire-me-assets/Resume_Gabriel_Goshorn_Current.pdf'
