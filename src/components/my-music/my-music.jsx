@@ -3,15 +3,13 @@ import '../../styles/my-music/my-music.css';
 import MusicTile from "./components/music-tile.jsx";
 import MusicController from "./components/music-controller.jsx";
 import { useEffect, useRef, useState } from "react";
-import {THEMES} from "../../constants/themes.ts";
-import { SONGS } from '../../constants/songs.ts';
-import { TILE_ANIMATIONS } from '../../constants/tileAnimations.ts';
+import {THEMES} from "../../constants/music/themes.ts";
+import { SONGS } from '../../constants/music/songs.ts';
+import {TILE_ANIMATIONS} from '../../constants/music/tileAnimations.ts'
 function MyMusic(){
     const [numOfMusicTileCols,setNumOfMusicTiles] = useState(7);
-    const [playSwitch, setPlaySwitch] = useState(false);
     const [numberOfMusicTiles,setNumberOfMusicTiles] = useState(100);
     const [selectedTheme,setSelectedTheme] = useState(THEMES[0].name);
-    const [tileColNum,setTileColNum] = useState(6);
     const [tempo,setTempo] = useState(80)
     const [musicTileArray,setTileArray] = useState(getTileGrid());
 
@@ -20,7 +18,7 @@ function MyMusic(){
         document.getElementById("music-tile-wrapper").scrollIntoView();
         
         if(window.innerWidth<600){
-            setNumOfMusicTiles(3);
+            setNumOfMusicTiles(5);
         }
         else if(window.innerWidth<1200){
             setNumOfMusicTiles(5);
@@ -29,7 +27,7 @@ function MyMusic(){
         }
         const handleResize = () => {
             if(window.innerWidth<600){
-                setNumOfMusicTiles(3);
+                setNumOfMusicTiles(5);
             }
             else if(window.innerWidth<1200){
                 setNumOfMusicTiles(5);
@@ -44,7 +42,6 @@ function MyMusic(){
         // Remove event listener when component unmounts
         return () => {
           window.removeEventListener('resize', handleResize);
-            
         };
       }, []); 
 
@@ -78,7 +75,7 @@ function MyMusic(){
     function getTileGrid(){
         let tileArray = []
         for(let i=1;i<=numberOfMusicTiles;i++){
-            tileArray.push(<MusicTile isPlaying={playSwitch}   tempo = {tempo} rowNumber = {Math.ceil(i/tileColNum)} tileNumber={i} key={i+"-music-tile"}></MusicTile>)
+            tileArray.push(<MusicTile key={i+"-music-tile"}></MusicTile>)
         }
         return tileArray;
     }

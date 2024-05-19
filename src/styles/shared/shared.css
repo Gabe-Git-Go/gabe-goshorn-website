@@ -1,0 +1,100 @@
+/*******Shared Components styling********/
+:root {
+    --numOfMusicTileCols: 6;
+    --tempo: 80;
+    --left: 0;
+    --top: 0; 
+    --backgroundColor: black;
+
+}
+
+/************************/
+/**NAVBAR*/
+/************************/
+#my-nav-bar-list li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    display: inline;
+    margin: 25px 25px ;
+    padding: 10px 10px;
+    border-right: 2px solid;
+    border-left: 2px solid;
+    border-color: rgba(240, 255, 255, 0.205);
+}
+#my-nav-bar-list li:hover{
+    cursor: pointer;
+    background-color: rgba(88, 109, 95, 0.781);
+    color: rgb(0, 0, 0);
+}
+
+#my-nav-bar-list li a{
+    color: rgb(245, 205, 154);
+    text-decoration: none;
+    font-family: "Jacquard 12", system-ui
+}
+
+
+#my-nav-bar-wrapper{
+    width:100%;
+    height: 50px;
+    margin-top: 25px;
+    color: rgb(184, 156, 156);
+}
+
+@media (max-width:500px) {
+    #my-nav-bar-list li{
+        margin: 10px 10px;
+    }
+}
+
+
+/*************************/
+/*HEADER*/
+/*************************/
+#header-wrapper{
+    background-color:var(--backgroundColor);
+    filter:hue-rotate(202deg);
+    color:rgb(184, 156, 156);
+    box-shadow: 20px rgb(158, 122, 122);
+    border-style: groove;
+}
+
+/* General styles for the footer */
+.footer {
+    width: 100%;
+    position: absolute;
+    
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+  }
+  
+  /* Flexbox container for the main content to ensure footer stays at the bottom */
+  body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #root {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .main-content {
+    flex: 1;
+  }
+  
+  /* Responsive design adjustments for mobile users */
+  @media (max-width: 768px) {
+    .footer {
+      font-size: 12px;
+      padding: 15px 0;
+    }
+  }

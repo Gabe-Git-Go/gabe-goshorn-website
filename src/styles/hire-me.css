@@ -1,0 +1,34 @@
+.resume{
+    text-decoration: none;
+    color:beige;
+    border-width: 1px;
+    border-style:groove;
+    font-size: 60px;
+    border-color: azure;
+    padding: 5px;
+    border-radius: 1px;
+    transition: all 1s ease-in-out;
+}
+.resume:hover{
+    padding:0px;
+    background-color: rgb(95, 86, 86);
+    transition: all 1s ease-in-out;
+}
+
+.contact-form{
+    padding-left:1em;
+    padding-right:1em;
+    max-width: 681px;
+    margin: auto;
+    margin-bottom:20px;
+}
+
+.contact-submit-btn{
+    background-color: antiquewhite;
+}
+
+
+#hire-me-wrapper{
+/* ViewPort Height - footer - header*/
+    min-height:calc(100vh - 57px - 199px);
+}

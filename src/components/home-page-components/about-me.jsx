@@ -1,9 +1,7 @@
-import meFlexing from '../../assets/home-assets/gabe_flexing.jpg'
 export default function AboutMe(){
     return (
         <div id= 'about-me-wrapper'>
-            <h2 className="heading-2">About Me</h2>
-            
+            <h1 className="heading-2">About Me</h1>
             <p id="about-me-text">
                 Hi, my name is Gabriel Goshorn but you can call me Gabe. I am originally from central Pennsylvania, but these days I live relatively close to Seattle, Washington.
                 I have always grown up with a fascination of music and just general problem solving. Going through grade school I would participate in my school's marching band, jazz bands and
@@ -12,7 +10,6 @@ export default function AboutMe(){
                 I wasn't quite sure where in computer science I wanted to go but with my first real job joining Tata Consultancy Services I got some real world experience in Web development. I knew that 
                 web development is something I really enjoyed doing in general. Hopefully with this website I have created I can showcase some of the skills I have picked up from doing web development over the past several years.
             </p>
-            <img src={meFlexing} alt="" className="inline-picture"/>
         </div>
     )
 }

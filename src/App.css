@@ -17,7 +17,6 @@
   color:aliceblue;
   /*overflow:hidden;*/
   min-height: 100vh;
-  font-family: "Jersey 15", sans-serif;
   font-style: normal;
   font-weight: 100 !important;
   font-size:24px;
@@ -49,6 +48,40 @@ h1,h2,h3,h4,h5{
   font-weight: 400;
   font-style: normal;
 }
+.josefin-sans-fancy {
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+.indie-flower-regular {
+  font-family: "Indie Flower", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+/* .jacquard-12-regular */
+h1 {
+  font-family: "Jacquard 12", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.jacquard-12-regular{
+  font-family: "Jacquard 12", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.open-sans-normal {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
 
 body::-webkit-scrollbar {
   width: 1em;
