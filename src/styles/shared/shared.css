@@ -11,20 +11,23 @@
 /************************/
 /**NAVBAR*/
 /************************/
+#my-nav-bar-list{
+    padding:0;
+}
+
 #my-nav-bar-list li {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     display: inline;
-    margin: 25px 25px;
-    padding: 10px 10px;
+    margin: 15px 15px;
     border-right: 2px solid;
     border-left: 2px solid;
     border-color: rgba(240, 255, 255, 0.205);
 }
 
-#my-nav-bar-list li:hover {
+#my-nav-bar-list li .nav-bar-item:hover {
     cursor: pointer;
     background-color: rgba(88, 109, 95, 0.781);
     color: rgb(0, 0, 0);
@@ -42,6 +45,10 @@
     height: 50px;
     margin-top: 25px;
     color: rgb(184, 156, 156);
+}
+.nav-bar-item{
+    display:inline-block;
+    width:73px;
 }
 
 @media (max-width:500px) {
