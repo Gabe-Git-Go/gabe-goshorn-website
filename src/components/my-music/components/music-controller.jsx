@@ -37,6 +37,7 @@ export default function MusicController({ allThemes, allAnimations, allSongs, so
         const currentSong = allSongs.find((song) => song.name === selectedSong);
         currSong.pause();
         setCurrSong(new Audio(currentSong.audioFile));
+        currSong.preload = 'auto';
         setTempo(currentSong.tempo);
         songChangeCallback(currSong.tempo);
         document.querySelector(':root').style.setProperty('--tempo', tempo);
