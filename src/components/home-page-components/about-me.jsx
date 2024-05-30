@@ -1,14 +1,12 @@
-export default function AboutMe(){
+export default function AboutMe() {
     return (
-        <div id= 'about-me-wrapper'>
+        <div id='about-me-wrapper'>
             <h1 className="heading-2">About Me</h1>
             <p id="about-me-text">
-                Hi, my name is Gabriel Goshorn but you can call me Gabe. I am originally from central Pennsylvania, but these days I live relatively close to Seattle, Washington.
-                I have always grown up with a fascination of music and just general problem solving. Going through grade school I would participate in my school's marching band, jazz bands and
-                computer science courses. Having these experiences growing up really gave me an idea of what I wanted to do in my career and life. I decided I would go to college and study computer science
-                while keeping up with my musical endeavors. I would end up going to Pennsylvania State University while participating in their jazz band and producing my own music on the side. Going out of college
-                I wasn't quite sure where in computer science I wanted to go but with my first real job joining Tata Consultancy Services I got some real world experience in Web development. I knew that 
-                web development is something I really enjoyed doing in general. Hopefully with this website I have created I can showcase some of the skills I have picked up from doing web development over the past several years.
+
+                Hello! My name is Gabriel Goshorn, but feel free to call me Gabe. I hail from central Pennsylvania, but now I reside near Seattle, Washington. From a young age, I've been passionate about music and problem-solving. Throughout grade school, I actively participated in my school's marching band and jazz bands, while also diving into computer science courses. These experiences shaped my career aspirations and life goals.
+                I pursued a degree in computer science at Pennsylvania State University, where I continued to be involved in the jazz band and produced my own music. Upon graduating, I was unsure which path within computer science to follow. My first job with Tata Consultancy Services provided valuable real-world experience in web development, and I quickly discovered my passion for it.
+                This website serves as a showcase of the skills and knowledge I've acquired over the years in web development. I hope you enjoy exploring my work as much as I have enjoyed creating it.
             </p>
         </div>
     )

@@ -6,12 +6,14 @@ import { useEffect, useRef, useState } from "react";
 import {THEMES} from "../../constants/music/themes.ts";
 import { SONGS } from '../../constants/music/songs.ts';
 import {TILE_ANIMATIONS} from '../../constants/music/tileAnimations.ts'
+import { FadeLoader } from 'react-spinners';
+
 function MyMusic(){
     const [numOfMusicTileCols,setNumOfMusicTiles] = useState(7);
     const [numberOfMusicTiles,setNumberOfMusicTiles] = useState(100);
     const [selectedTheme,setSelectedTheme] = useState(THEMES[0].name);
-    const [tempo,setTempo] = useState(80)
     const [musicTileArray,setTileArray] = useState(getTileGrid());
+    const [loading,setLoading] = useState(false);
 
     useEffect(() => {
         // Function to be called when window is resized
@@ -80,10 +82,16 @@ function MyMusic(){
         return tileArray;
     }
 
+    const handleLoadingIconCallback=(isLoading)=>{
+        console.log("isLoading",isLoading)
+        setLoading(isLoading);
+    }
+
     return (
         <div id="my-music-wrapper">
-            <MusicController themeChangeCallback={handleThemeChangeCallback} songChangeCallback={handleSongChangeCallback} allTileAnimations={TILE_ANIMATIONS} allSongs={SONGS} currentTheme={selectedTheme} allThemes={THEMES} tempo = {tempo}/>
-            <div id="music-tile-wrapper" className=''>
+            <MusicController themeChangeCallback={handleThemeChangeCallback} songLoadingIconCallback={handleLoadingIconCallback} songChangeCallback={()=>handleSongChangeCallback()} allTileAnimations={TILE_ANIMATIONS} allSongs={SONGS} currentTheme={selectedTheme} allThemes={THEMES}/>
+            {loading?<div className="background"><FadeLoader className="loading-spinner" color="black" /></div>:''}
+            <div id="music-tile-wrapper" className='animation paused'>
                 {
                     musicTileArray
                 }
