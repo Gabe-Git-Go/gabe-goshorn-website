@@ -18,7 +18,7 @@ export const PICTURES: Picture[] = [
     {
         displayTitle: "Rattlesnake Ledge",
         imgFile: gabeMountain2,
-        description: "Me and my wife went on the Rattlesnake ledge trail with only 2 waterbottle containers and no snacks, on a 4.5 mile trail. Needles to say it was a push, but well worth it."
+        description: "Me and my wife went on the Rattlesnake ledge trail with only 2 waterbottle containers and no snacks, on a 4.5 mile trail. Needless to say it was a push, but well worth it."
     },    
     {
         displayTitle: "Looking to the sky",

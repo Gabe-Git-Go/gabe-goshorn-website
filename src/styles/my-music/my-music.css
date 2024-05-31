@@ -2,6 +2,7 @@
 /*My Music Page*/
 /****************************/
 @import "tileAnimations.css";
+
 /* These variables are just initial and will be changed in the my-music.jsx page*/
 :root {
     --numOfMusicTileCols: 6;
@@ -10,58 +11,62 @@
     --oddMusicTileColor: blue;
     --firstBoxShadow: blue;
     --secondBoxShadow: red;
-    --animationIterationCount : infinite;
-    --appliedAnimations : ;
-    --animationDurations : ;
+    --animationIterationCount: infinite;
+    --appliedAnimations: ;
+    --animationDurations: ;
     --animationTimingFunction: ;
-    --mobileSlideDirection : ;
+    --mobileSlideDirection: ;
 }
 
 
-.music-tile{
+.music-tile {
     border: none;
     border-radius: 5px;
     height: calc(100vw/var(--numOfMusicTileCols));
-    width:100%;
-}
-.music-tile:hover{
-    filter:brightness(.9);
+    width: 100%;
 }
 
-.selectorList input.form-check-input:checked{
+.music-tile:hover {
+    filter: brightness(.9);
+}
+
+.selectorList input.form-check-input:checked {
     background-color: gray !important;
     filter: hue-rotate(202deg);
 }
 
-.animation > .music-tile{
+.animation>.music-tile {
     animation-name: var(--appliedAnimations);
     animation-duration: var(--animationDurations);
-    animation-iteration-count:var(--animationIterationCount) ;
-    animation-timing-function:var(--animationTimingFunction);
+    animation-iteration-count: var(--animationIterationCount);
+    animation-timing-function: var(--animationTimingFunction);
 }
-.animation > .music-tile:nth-child(odd){
+
+.animation>.music-tile:nth-child(odd) {
     animation-direction: alternate;
 }
 
-.animation > .music-tile:nth-child(even){
+.animation>.music-tile:nth-child(even) {
     animation-direction: alternate-reverse;
 }
 
-.music-tile:nth-child(odd){
+.music-tile:nth-child(odd) {
     background-color: var(--oddMusicTileColor);
 }
 
-.music-tile:nth-child(even){
+.music-tile:nth-child(even) {
     background-color: var(--evenMusicTileColor);
 }
 
-.paused > .music-tile{
+.paused>.music-tile {
     animation-play-state: paused;
 }
-.play > .music-tile{
-    animation-play-state:running !important;
+
+.play>.music-tile {
+    animation-play-state: running !important;
 }
-#music-tile-wrapper{
+
+#music-tile-wrapper {
     display: grid;
     max-height: 100%;
     background-color: white;
@@ -69,13 +74,22 @@
     background-color: var(--backgroundColor);
     overflow: hidden;
 }
-@media only screen and (max-width: 250px) {
-    
+
+@media only screen and (max-width: 250px) {}
+
+.arrow-icon {
+    margin-bottom: 10px;
+    transition: all .5s ease-in-out;
+}
+
+.arrow-icon-upside-down {
+    transform: rotate(180deg);
+    transition: all .5s ease-in-out;
 }
 
 .volume-wrapper {
-    margin-top:40px;
-    margin-left:10px;
+    margin-top: 40px;
+    margin-left: 10px;
     float: left;
     background: var(--backgroundColor);
     border-radius: 25px;
@@ -84,131 +98,146 @@
     width: 60px;
     height: 60px;
     overflow: hidden;
-    transition:all .3s ease-in-out;
-}
-.volume-wrapper:hover{
-    width:200px;
-    height:60px;
+    transition: all .3s ease-in-out;
 }
 
-.volume-icon{
-    padding-top:5px;
-    float:left;
+.volume-wrapper:hover {
+    width: 200px;
+    height: 60px;
+}
+
+.volume-icon {
+    padding-top: 5px;
+    float: left;
     width: 45px;
     height: 45px;
     cursor: pointer;
 }
 
-#volume-range{
+#volume-range {
     filter: hue-rotate(18deg);
 }
-.volume-range-wrapper{
+
+.volume-range-wrapper {
     padding-top: 7px;
 }
 
-.selector-animation-wrapper{
+.selector-animation-wrapper {
     background: #e5dcdc;
-    padding-left:5px;
+    padding-left: 5px;
 }
 
-#selector-title-animation{
+#selector-title-animation {
     border-bottom: 5px;
     border-color: black;
 }
 
-.music-ctrl{
-    position:sticky;
-    float:left;
-}
-#music-animation-ctrl-wrapper:hover{
-    opacity:1;
+.music-ctrl {
+    position: sticky;
+    float: left;
 }
 
+#music-animation-ctrl-wrapper:hover {
+    opacity: 1;
+}
 
-#music-animation-ctrl-wrapper{
+#music-animation-ctrl-wrapper.open {
+    max-height: calc(100vh - 15px);
+    height: 81%;
+    transition: all .3s ease-in-out;
+}
+
+#music-animation-ctrl-wrapper {
     opacity: .25;
-    position:fixed;
-    bottom: 0px;   
-    left:0px;
+    height: 218px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
     z-index: 30;
-    width:100%;
+    width: 100%;
     color: black;
-    padding:10px;
-    transition:all .3s ease-in-out;
+    padding: 10px;
+    transition: all .3s ease-in-out;
 }
-.music-ctrl-btn{
+
+.music-ctrl-btn {
     cursor: pointer;
     width: 125px;
-    margin-top:30px;
-}
-.mb-0{
-    margin-bottom:0px;
+    margin-top: 30px;
 }
 
-.mobile-more-btn{
+.mb-0 {
+    margin-bottom: 0px;
+}
+
+.mobile-more-btn {
     display: none;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.selector{
+.selector {
     font-size: 25px;
-    max-height:150px;
+    max-height: 150px;
     /* width:100%; */
     max-width: 400px;
     min-width: 300px;
     overflow-y: auto;
-    scrollbar-width:thin;
+    scrollbar-width: thin;
     scrollbar-track-color: var(--backgroundColor);
-    scrollbar-color:  var(--backgroundColor) gray;
-    scroll-snap-type:proximity;
+    scrollbar-color: var(--backgroundColor) gray;
+    scroll-snap-type: proximity;
     border-radius: 0px;
     scroll-behavior: smooth;
 }
-.selector-label{
+
+.selector-label {
     font-size: 50px;
-    margin-top:70px;
+    margin-top: 70px;
     margin-left: 25px;
 }
-.selector-list-wrapper{
+
+.selector-list-wrapper {
     display: inline-table;
-    margin:5px;
+    margin: 5px;
+    width: 300px;
 
 }
 
-#music-ctrl-wrapper{
-    width:1085px;
+#music-ctrl-wrapper {
+    width: 1085px;
     display: inline-block;
 }
 
-#music-animation-ctrl-wrapper:hover{
+#music-animation-ctrl-wrapper:hover {
     background-color: rgba(197, 197, 221, 0.658);
 }
 
-.song-title{
+.song-title {
     font-size: 50px;
-    color:black;
-    text-shadow: 50px white;    
+    color: black;
+    text-shadow: 50px white;
     bottom: 5%;
-    margin-left:0px;
+    margin-left: 0px;
     margin-top: 30px;
-    min-width:40%;
+    min-width: 40%;
 }
 
-.selectorList{
-    max-height:200px;
+.selectorList {
+    max-height: 200px;
 }
 
-.selector-title{
-    padding-top:5px;
+.selector-title {
+    padding-top: 5px;
     background-color: var(--backgroundColor);
 }
-.selector-wrapper{
-    float:right;
+
+.selector-wrapper {
+    float: right;
     max-width: fit-content;
 }
 
-.song-img{
+.song-img {
     height: 150px;
     width: 150px;
     border-style: groove;
@@ -219,7 +248,7 @@
 
 
 .play-pause-container {
-    margin-top:18px;
+    margin-top: 18px;
     margin-left: 60px;
     background: var(--backgroundColor);
     width: 100px;
@@ -234,7 +263,7 @@
 .playpause-chk {
     appearance: none;
 
-    + label {
+    +label {
         display: block;
         height: 36px;
         width: 0;
@@ -246,7 +275,7 @@
 
     }
 
-    &:checked + label {
+    &:checked+label {
         width: 0;
         height: 0;
         border-style: solid;
@@ -260,7 +289,7 @@
 .playpause-chk-icon {
     appearance: none;
 
-    + label::before {
+    +label::before {
         content: "❚❚";
         display: block;
         font-size: 48px;
@@ -270,124 +299,203 @@
         transform: rotate(-180deg);
     }
 
-    &:checked + label::before {
+    &:checked+label::before {
         content: "►";
         transform: rotate(0);
-        
+
     }
+}
+
+.loading-spinner {
+    position: absolute !important;
+    font-size: 0px;
+    width: 100px !important;
+    height: 100px !important;
+    display: initial !important;
+    bottom: 50vh !important;
+    left: 50% !important;
+    top:auto !important;
+
+    span {
+        height: 20px !important;
+        width: 5px !important;
+        margin: 0px !important;
+    }
+}
+
+.background {
+    opacity: .5;
+    background-color: whitesmoke;
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 
 @media (max-width:2080px) and (min-width:628px) {
+
     .selector-wrapper,
-    #music-ctrl-wrapper{
-        margin:auto;
+    #music-ctrl-wrapper {
+        margin: auto;
         float: none;
-    }    
-    #music-animation-ctrl-wrapper{
-        margin-bottom:-208px;
     }
-    .mobile-more-btn{
-        display:initial !important;
+
+    #music-animation-ctrl-wrapper {
+        height: 169px;
+    }
+
+    #music-animation-ctrl-wrapper.open {
+        height: 390px;
+        transition: all .3s ease-in-out;
+    }
+
+    .mobile-more-btn {
+        display: initial !important;
         border-radius: 5px;
         border-bottom: none;
-        opacity:.75;
+        opacity: .75;
         position: absolute;
         width: 200px;
         margin-top: -28px;
         height: 40px;
     }
 }
-@media (max-width:1010px) and (min-width:628px)  {
-    #music-ctrl-wrapper{
-        width:auto;
+
+@media (max-width:1010px) and (min-width:628px) {
+    #music-ctrl-wrapper {
+        width: 100%;
     }
-    #music-animation-ctrl-wrapper{
-        margin-bottom: -407px;
+
+    #music-animation-ctrl-wrapper {
+        height: 136px;
     }
+
+    #music-animation-ctrl-wrapper.open {
+        height: 549px;
+        transition: all .3s ease-in-out;
+    }
+
     .song-title {
         font-size: 30px;
-        margin-top:50px;
+        margin-top: 50px;
     }
-    div.play-pause-container{
+
+    div.play-pause-container {
         margin-left: 10px;
-        margin-top:35px;
+        margin-top: 35px;
         cursor: pointer;
         width: 70px;
         height: 70px;
     }
-    img.music-ctrl-btn{
-        margin-top:15px;
+
+    img.music-ctrl-btn {
+        margin-top: 15px;
         cursor: pointer;
         width: 64px;
     }
-    img.song-img{
-        width:100px;
-        height:100px;
+
+    img.song-img {
+        width: 100px;
+        height: 100px;
         margin: 20px 20px 0px 5px;
     }
-    #music-ctrl-wrapper{
+
+    #music-ctrl-wrapper {
         float: left;
     }
-    .volume-wrapper{
-        margin-top:40px;
+
+    .volume-wrapper {
+        margin-top: 40px;
     }
 }
 
 
 @media (max-width: 628px) {
-    #music-ctrl-wrapper{
-        width:100%;
-    }
-    #music-animation-ctrl-wrapper{
+    #music-animation-ctrl-wrapper.open {
+        max-height: calc(100vh - 15px);
+        height: 81%;
         transition: all .3s ease-in-out;
-        margin-bottom:-621px;
     }
-    img.music-ctrl-btn{
-        margin-top:15px;
+
+    #music-ctrl-wrapper {
+        width: 100%;
+    }
+
+    #music-animation-ctrl-wrapper {
+        height: 110px
+    }
+
+    img.music-ctrl-btn {
+        margin-top: 15px;
         cursor: pointer;
         width: 64px;
     }
-    div.play-pause-container{
+
+    div.play-pause-container {
         margin-left: 0px;
-        margin-top:10px;
+        margin-top: 10px;
         cursor: pointer;
         width: 70px;
         height: 70px;
     }
-    span.song-title{
-        font-size:25px;
+
+    span.song-title {
+        font-size: 25px;
         max-height: 50px;
-        margin-top:20px !important;
-        margin-left:0px;
-        padding-left:5px;
-        padding-right:5px;
+        margin-top: 20px !important;
+        margin-left: 0px;
+        padding-left: 5px;
+        padding-right: 5px;
         overflow: hidden;
-        width:60%;
+        width: 60%;
         line-height: 24px;
     }
-    img.song-img{
-        width:50px;
-        height:50px;
-        margin: 20px 0 0 5px ;
+
+    img.song-img {
+        width: 50px;
+        height: 50px;
+        margin: 20px 0 0 5px;
     }
-    .selector-wrapper > .selector{
-        margin:0px;
+
+    .selector-wrapper>.selector {
+        margin: 0px;
     }
+
     .selector-wrapper {
         margin-top: 10px;
     }
-    .mobile-more-btn{
-        display:initial !important;
+
+    .mobile-more-btn {
+        display: initial !important;
         border-radius: 5px;
         border-bottom: none;
-        opacity:.75;
+        opacity: .75;
         position: absolute;
-        width: 60px;
+        width: 150px;
         margin-top: -28px;
         height: 28px;
     }
+
     .volume-wrapper {
         display: none;
+    }
+}
+
+@media (max-height:750px) {
+    .selector-list-wrapper {
+        height: 160px;
+        display: grid;
+        width: 325px;
+    }
+
+    .selector-wrapper {
+        margin-left: auto;
+        margin-right: auto;
+        float: unset;
+    }
+
+    #music-animation-ctrl-wrapper.open {
+        height: calc(100vh - 15px);
     }
 }

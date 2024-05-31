@@ -4,10 +4,12 @@ import Form from 'react-bootstrap/Form';
 import { TILE_ANIMATIONS } from "../../../constants/music/tileAnimations.ts";
 import { FaVolumeUp } from "react-icons/fa";
 import { FaVolumeMute } from "react-icons/fa";
+import { MdKeyboardArrowUp } from "react-icons/md";
 
 
 
-export default function MusicController({ allThemes, allAnimations, allSongs, songChangeCallback, currentTheme, themeChangeCallback, animationChangeCallback }) {
+
+export default function MusicController({ allThemes, allSongs, songChangeCallback, currentTheme, themeChangeCallback, songLoadingIconCallback }) {
     const [selectedSong, setSelectedSong] = useState(allSongs[0].name)
     const [currSong, setCurrSong] = useState(new Audio(allSongs[0].audioFile))
     const [playSwitch, setPlaySwitch] = useState(false);
@@ -17,10 +19,48 @@ export default function MusicController({ allThemes, allAnimations, allSongs, so
     const [volume, setVolume] = useState(1);
 
     useEffect(() => {
-        return () => {
+        allSongs.forEach(song => {
+            const audio = new Audio(song.audioFile);
+            audio.preload = 'auto';
+        });
+    }, [allSongs]);
+
+    useEffect(()=>{
+        return ()=>{
             currSong.pause();
         }
-    }, [currSong])
+    },[currSong])
+    
+    useEffect(() => {
+        // Cleanup function for the previous currSong
+        const cleanupPreviousSong = () => {
+            //currSong.pause();
+        };
+
+        // Event listeners for the new currSong
+        const handleLoadingStart = () => {
+            document.getElementById('music-tile-wrapper').classList.replace('play', 'paused');
+            songLoadingIconCallback(true && playSwitch);
+        };
+
+        const handleLoadingEnd = () => {
+            if (playSwitch)
+                document.getElementById('music-tile-wrapper').classList.replace('paused', 'play');
+            songLoadingIconCallback(false);
+        };
+
+        currSong.addEventListener('waiting', handleLoadingStart);
+        currSong.addEventListener('loadeddata', handleLoadingEnd);
+        currSong.addEventListener('canplaythrough', handleLoadingEnd);
+
+        // Cleanup event listeners when currSong changes
+        return () => {
+            cleanupPreviousSong();
+            currSong.removeEventListener('waiting', handleLoadingStart);
+            currSong.removeEventListener('loadeddata', handleLoadingEnd);
+            currSong.removeEventListener('canplaythrough', handleLoadingEnd);
+        };
+    }, [currSong, playSwitch, songLoadingIconCallback]);
 
     useEffect(() => {
         currSong.volume = volume;
@@ -28,18 +68,22 @@ export default function MusicController({ allThemes, allAnimations, allSongs, so
 
     //When play switch is changed, update the tile grid, and stop/start audio
     useEffect(() => {
-        document.getElementById('music-tile-wrapper').className = document.getElementById('music-tile-wrapper').className.replace(playSwitch ? 'paused' : 'play', '');
-        document.getElementById('music-tile-wrapper').className += ` ${playSwitch ? 'play' : 'paused'}`;
+        document.getElementById('music-tile-wrapper').classList.replace(playSwitch ? 'paused' : 'play', playSwitch ? 'play' : 'paused');
         playSwitch ? currSong.play() : currSong.pause();
     }, [playSwitch])
 
     useEffect(() => {
+        document.querySelector(':root').style.setProperty('--tempo', tempo);
+    }, [tempo])
+
+    useEffect(() => {
         const currentSong = allSongs.find((song) => song.name === selectedSong);
         currSong.pause();
-        setCurrSong(new Audio(currentSong.audioFile));
+        const newAudio = new Audio(currentSong.audioFile);
+        newAudio.preload = 'auto'; // Preload the selected song
+        setCurrSong(newAudio);
         setTempo(currentSong.tempo);
         songChangeCallback(currSong.tempo);
-        document.querySelector(':root').style.setProperty('--tempo', tempo);
         setPlaySwitch(false);
     }, [selectedSong])
 
@@ -115,8 +159,8 @@ export default function MusicController({ allThemes, allAnimations, allSongs, so
     }
 
     return (
-        <div id="music-animation-ctrl-wrapper" className={(mobileSlideUp ? ' mb-0 ' : '')}>
-            <button onClick={() => setMobileSlideUp(!mobileSlideUp)} className="mobile-more-btn">^</button>
+        <div id="music-animation-ctrl-wrapper" className={(mobileSlideUp?' mb-0 open' : '')}>
+            <button onClick={() => setMobileSlideUp(!mobileSlideUp)} className="mobile-more-btn"><MdKeyboardArrowUp className={"arrow-icon " + (mobileSlideUp ? 'arrow-icon-upside-down' : '')} /></button>
             <div id="music-ctrl-wrapper">
                 <img className='song-img music-ctrl' src={(allSongs.find((song) => song.name === selectedSong)).imageUrl} alt="" />
                 <span className="music-ctrl song-title">{selectedSong}</span>
