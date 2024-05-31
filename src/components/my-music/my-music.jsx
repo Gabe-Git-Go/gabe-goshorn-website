@@ -15,6 +15,7 @@ function MyMusic() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        document.getElementById("music-tile-wrapper").scrollIntoView();
         const handleResize = debounce(() => {
             //set timeout is to allow tile to resize first
             setTimeout(()=>{
