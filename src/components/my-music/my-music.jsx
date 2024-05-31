@@ -2,103 +2,108 @@ import '../../styles/home.css';
 import '../../styles/my-music/my-music.css';
 import MusicTile from "./components/music-tile.jsx";
 import MusicController from "./components/music-controller.jsx";
-import { useEffect, useRef, useState } from "react";
-import {THEMES} from "../../constants/music/themes.ts";
+import { useEffect, useState } from "react";
+import { THEMES } from "../../constants/music/themes.ts";
 import { SONGS } from '../../constants/music/songs.ts';
-import {TILE_ANIMATIONS} from '../../constants/music/tileAnimations.ts'
+import { TILE_ANIMATIONS } from '../../constants/music/tileAnimations.ts';
 import { FadeLoader } from 'react-spinners';
+import { debounce } from 'lodash';
 
-function MyMusic(){
-    const [numOfMusicTileCols,setNumOfMusicTiles] = useState(7);
-    const [numberOfMusicTiles,setNumberOfMusicTiles] = useState(100);
-    const [selectedTheme,setSelectedTheme] = useState(THEMES[0].name);
-    const [musicTileArray,setTileArray] = useState(getTileGrid());
-    const [loading,setLoading] = useState(false);
+function MyMusic() {
+    const [numOfMusicTileCols, setNumOfMusicTileCols] = useState(getNumberOfCols());
+    const [numberOfMusicTiles, setNumberOfMusicTiles] = useState(getNumberOfTiles());
+    const [selectedTheme, setSelectedTheme] = useState(THEMES[0].name);
+    const [musicTileArray, setTileArray] = useState(getTileGrid());
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        // Function to be called when window is resized
-        document.getElementById("music-tile-wrapper").scrollIntoView();
-        
-        if(window.innerWidth<600){
-            setNumOfMusicTiles(5);
-        }
-        else if(window.innerWidth<1200){
-            setNumOfMusicTiles(5);
-        }else{
-            setNumOfMusicTiles(7);
-        }
-        const handleResize = () => {
-            if(window.innerWidth<600){
-                setNumOfMusicTiles(5);
-            }
-            else if(window.innerWidth<1200){
-                setNumOfMusicTiles(5);
-            }else{
-                setNumOfMusicTiles(7);
-            }
-        };
-    
-        // Add event listener when component mounts
+        const handleResize = debounce(() => {
+            //set timeout is to allow tile to resize first
+            setTimeout(()=>{
+                const numberOfCols = getNumberOfCols();
+                const numberOfTiles = getNumberOfTiles(numberOfCols);
+                setNumOfMusicTileCols(numberOfCols);
+                setNumberOfMusicTiles(numberOfTiles);
+            },100)
+        }, 100);
+        handleResize();
+
         window.addEventListener('resize', handleResize);
-    
-        // Remove event listener when component unmounts
+
         return () => {
-          window.removeEventListener('resize', handleResize);
+            window.removeEventListener('resize', handleResize);
         };
-      }, []); 
+    }, []);
 
-    //Set Theme
-    useEffect(()=>{
-        const currentTheme = THEMES.find((theme)=>theme.name===selectedTheme);
-        document.querySelector(':root').style.setProperty('--backgroundColor', currentTheme.colors.backgroundColor );
-        document.querySelector(':root').style.setProperty('--evenMusicTileColor', currentTheme.colors.tileColor1 );
-        document.querySelector(':root').style.setProperty('--oddMusicTileColor',currentTheme.colors.tileColor2 );
-        document.querySelector(':root').style.setProperty('--firstBoxShadow',currentTheme.colors.shadowColor1 );
-        document.querySelector(':root').style.setProperty('--secondBoxShadow',currentTheme.colors.shadowColor2 );
-    },[selectedTheme])
-
-    //Set number of cols
-    useEffect(()=>{
-        document.querySelector(':root').style.setProperty('--numOfMusicTileCols', numOfMusicTileCols );
-    },[numOfMusicTileCols])
-
-    //Reset Animation on song change
-    function handleSongChangeCallback(){
-        document.getElementById('music-tile-wrapper').className = document.getElementById('music-tile-wrapper').className.replace('animation','');
-        setTimeout(()=>{
-            document.getElementById('music-tile-wrapper').className += ' animation';
-        })
-    }
-
-    function handleThemeChangeCallback(themeName){
-        setSelectedTheme(themeName);
-    } 
-
-    function getTileGrid(){
-        let tileArray = []
-        for(let i=1;i<=numberOfMusicTiles;i++){
-            tileArray.push(<MusicTile key={i+"-music-tile"}></MusicTile>)
+    useEffect(() => {
+        const currentTheme = THEMES.find((theme) => theme.name === selectedTheme);
+        if (currentTheme) {
+            document.documentElement.style.setProperty('--backgroundColor', currentTheme.colors.backgroundColor);
+            document.documentElement.style.setProperty('--evenMusicTileColor', currentTheme.colors.tileColor1);
+            document.documentElement.style.setProperty('--oddMusicTileColor', currentTheme.colors.tileColor2);
+            document.documentElement.style.setProperty('--firstBoxShadow', currentTheme.colors.shadowColor1);
+            document.documentElement.style.setProperty('--secondBoxShadow', currentTheme.colors.shadowColor2);
         }
-        return tileArray;
+    }, [selectedTheme]);
+
+    useEffect(() => {
+        document.documentElement.style.setProperty('--numOfMusicTileCols', numOfMusicTileCols);
+        setTileArray(getTileGrid());
+    }, [numOfMusicTileCols, numberOfMusicTiles]);
+
+    function handleSongChangeCallback() {
+        const wrapper = document.getElementById('music-tile-wrapper');
+        wrapper.classList.remove('animation');
+        setTimeout(() => {
+            wrapper.classList.add('animation');
+        });
     }
 
-    const handleLoadingIconCallback=(isLoading)=>{
-        console.log("isLoading",isLoading)
-        setLoading(isLoading);
+    function handleThemeChangeCallback(themeName) {
+        setSelectedTheme(themeName);
     }
+
+    function getTileGrid() {
+        return Array.from({ length: numberOfMusicTiles }, (_, i) => (
+            <MusicTile key={i + "-music-tile"} />
+        ));
+    }
+
+    function getNumberOfCols() {
+        if (window.innerWidth < 600) {
+            return 5;
+        } else if (window.innerWidth < 1200) {
+            return 5;
+        } else {
+            return 7;
+        }
+    }
+
+    function getNumberOfTiles(cols = numOfMusicTileCols) {
+        const tileHeight = document.querySelector('.music-tile')?.clientHeight || 100; // Default to 100 if not rendered yet
+        return Math.ceil(window.innerHeight / tileHeight) * cols;
+    }
+
+    const handleLoadingIconCallback = (isLoading) => {
+        setLoading(isLoading);
+    };
 
     return (
         <div id="my-music-wrapper">
-            <MusicController themeChangeCallback={handleThemeChangeCallback} songLoadingIconCallback={handleLoadingIconCallback} songChangeCallback={()=>handleSongChangeCallback()} allTileAnimations={TILE_ANIMATIONS} allSongs={SONGS} currentTheme={selectedTheme} allThemes={THEMES}/>
-            {loading?<div className="background"><FadeLoader className="loading-spinner" color="black" /></div>:''}
-            <div id="music-tile-wrapper" className='animation paused'>
-                {
-                    musicTileArray
-                }
+            <MusicController 
+                themeChangeCallback={handleThemeChangeCallback}
+                songLoadingIconCallback={handleLoadingIconCallback}
+                songChangeCallback={handleSongChangeCallback}
+                allSongs={SONGS}
+                currentTheme={selectedTheme}
+                allThemes={THEMES}
+            />
+            {loading && <div className="background"><FadeLoader className="loading-spinner" color="black" /></div>}
+            <div id="music-tile-wrapper" className="animation paused">
+                {musicTileArray}
             </div>
         </div>
-    )
+    );
 }
 
 export default MyMusic;
-

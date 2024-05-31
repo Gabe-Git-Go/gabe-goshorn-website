@@ -9,7 +9,7 @@ import { MdKeyboardArrowUp } from "react-icons/md";
 
 
 
-export default function MusicController({ allThemes, allAnimations, allSongs, songChangeCallback, currentTheme, themeChangeCallback, songLoadingIconCallback }) {
+export default function MusicController({ allThemes, allSongs, songChangeCallback, currentTheme, themeChangeCallback, songLoadingIconCallback }) {
     const [selectedSong, setSelectedSong] = useState(allSongs[0].name)
     const [currSong, setCurrSong] = useState(new Audio(allSongs[0].audioFile))
     const [playSwitch, setPlaySwitch] = useState(false);
@@ -24,10 +24,17 @@ export default function MusicController({ allThemes, allAnimations, allSongs, so
             audio.preload = 'auto';
         });
     }, [allSongs]);
+
+    useEffect(()=>{
+        return ()=>{
+            currSong.pause();
+        }
+    },[currSong])
+    
     useEffect(() => {
         // Cleanup function for the previous currSong
         const cleanupPreviousSong = () => {
-            currSong.pause();
+            //currSong.pause();
         };
 
         // Event listeners for the new currSong
@@ -39,7 +46,7 @@ export default function MusicController({ allThemes, allAnimations, allSongs, so
         const handleLoadingEnd = () => {
             if (playSwitch)
                 document.getElementById('music-tile-wrapper').classList.replace('paused', 'play');
-            songLoadingIconCallback(false && playSwitch);
+            songLoadingIconCallback(false);
         };
 
         currSong.addEventListener('waiting', handleLoadingStart);
