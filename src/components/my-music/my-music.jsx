@@ -96,7 +96,7 @@ function MyMusic() {
                 currentTheme={selectedTheme}
                 allThemes={THEMES}
             />
-            {true && <div className="background"><h1 className='loading-spinner'>Loading...</h1></div>}
+            {loading && <div className="background"><h1 className='loading-spinner'>Loading...</h1></div>}
             <div id="music-tile-wrapper" className="animation paused">
                 {musicTileArray}
             </div>
