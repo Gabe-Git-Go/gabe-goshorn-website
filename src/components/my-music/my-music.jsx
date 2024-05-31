@@ -5,8 +5,6 @@ import MusicController from "./components/music-controller.jsx";
 import { useEffect, useState } from "react";
 import { THEMES } from "../../constants/music/themes.ts";
 import { SONGS } from '../../constants/music/songs.ts';
-import { TILE_ANIMATIONS } from '../../constants/music/tileAnimations.ts';
-import { FadeLoader } from 'react-spinners';
 import { debounce } from 'lodash';
 
 function MyMusic() {
@@ -98,7 +96,7 @@ function MyMusic() {
                 currentTheme={selectedTheme}
                 allThemes={THEMES}
             />
-            {loading && <div className="background"><FadeLoader className="loading-spinner" color="black" /></div>}
+            {loading && <div className="background"><h1 className='loading-spinner'>Loading...</h1></div>}
             <div id="music-tile-wrapper" className="animation paused">
                 {musicTileArray}
             </div>

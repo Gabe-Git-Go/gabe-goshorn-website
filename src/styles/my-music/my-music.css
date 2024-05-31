@@ -308,19 +308,11 @@
 
 .loading-spinner {
     position: absolute !important;
-    font-size: 0px;
-    width: 100px !important;
-    height: 100px !important;
-    display: initial !important;
-    bottom: 50vh !important;
-    left: 50% !important;
-    top:auto !important;
-
-    span {
-        height: 20px !important;
-        width: 5px !important;
-        margin: 0px !important;
-    }
+    margin-left: auto;
+    color: black;
+    top: 50vh;
+    left: 50vw;
+    transform: translateX(-50%);
 }
 
 .background {
