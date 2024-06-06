@@ -1,8 +1,8 @@
-import { getEnvironment } from "./environment";
+//import { getEnvironment } from "./environment";
 import axios from 'axios';
 
 const axiosContext = axios.create({
-    baseURL: getEnvironment().API_BASE_URL,
+    baseURL: process.env.BE_PROD_API_BASE_UR,
     headers: {
       'Content-Type': 'application/json',
     },
