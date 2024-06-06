@@ -32,6 +32,8 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
           S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+          BE_API_BASE_URL: ${{ secrets.BE_API_BASE_URL }}
+
         run: |
           npm install -g aws-cli
           aws s3 sync build/ s3://$S3_BUCKET_NAME --delete
