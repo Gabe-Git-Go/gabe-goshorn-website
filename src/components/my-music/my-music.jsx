@@ -6,11 +6,14 @@ import { useEffect, useState } from "react";
 import { THEMES } from "../../constants/music/themes.ts";
 import { SONGS } from '../../constants/music/songs.ts';
 import { debounce } from 'lodash';
+import { useAppContext } from '../../config/app-context.jsx';
 
 function MyMusic() {
+    const {appState, setAppState } = useAppContext();
+
     const [numOfMusicTileCols, setNumOfMusicTileCols] = useState(getNumberOfCols());
     const [numberOfMusicTiles, setNumberOfMusicTiles] = useState(getNumberOfTiles());
-    const [selectedTheme, setSelectedTheme] = useState(THEMES[0].name);
+    const [selectedTheme, setSelectedTheme] = useState(appState.theme.name);
     const [musicTileArray, setTileArray] = useState(getTileGrid());
     const [loading, setLoading] = useState(false);
 
@@ -36,6 +39,7 @@ function MyMusic() {
 
     useEffect(() => {
         const currentTheme = THEMES.find((theme) => theme.name === selectedTheme);
+        setAppState({theme:currentTheme});
         if (currentTheme) {
             document.documentElement.style.setProperty('--backgroundColor', currentTheme.colors.backgroundColor);
             document.documentElement.style.setProperty('--evenMusicTileColor', currentTheme.colors.tileColor1);

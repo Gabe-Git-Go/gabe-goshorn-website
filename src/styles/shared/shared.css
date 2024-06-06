@@ -122,3 +122,14 @@ html {
         padding: 15px 0;
     }
 }
+
+/*************************/
+/*******TOAST MSG*********/
+/*************************/
+
+.toast{
+    position: fixed;
+    right: 42px;
+    z-index: 1;
+    bottom: 33px;
+}
