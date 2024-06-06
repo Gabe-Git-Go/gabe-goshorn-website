@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const axiosContext = axios.create({
-    baseURL: process.env.BE_PROD_API_BASE_UR,
+    baseURL: process.env.BE_PROD_API_BASE_URL,
     headers: {
       'Content-Type': 'application/json',
     },
