@@ -1,21 +1,21 @@
 import './App.css';
 import Header from './components/shared/header';
-import {BrowserRouter, Routes, Route, Outlet} from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 import './styles/shared/shared.css'
 import MyMusic from './components/my-music/my-music';
-import HireMe from './components/hire-me';
+import HireMe from './components/hire-me/hire-me';
 import Home from './components/home-page-components/home';
 import Footer from './components/shared/footer';
+import { AppProvider} from './config/app-context';
+import ToastMessage from './components/shared/toast-message';
 
+// THIS CODE WAS FOR TESTING A CURSOR TRACKER THING
 // document.onmousemove = handleMouseMove;
 // function handleMouseMove(event) {
 //     var eventDoc, doc, body;
 //     var r = document.querySelector(':root');
 //     event = event || window.event; // IE-ism
 //     var rs = getComputedStyle(r);
-//     // If pageX/Y aren't available and clientX/Y are,
-//     // calculate pageX/Y - logic taken from jQuery.
-//     // (This is to support old IE)
 //     if (event.pageX == null && event.clientX != null) {
 //         eventDoc = (event.target && event.target.ownerDocument) || document;
 //         doc = eventDoc.documentElement;
@@ -42,23 +42,28 @@ import Footer from './components/shared/footer';
 
 //     // Use event.pageX / event.pageY here
 // }
+
+
 function App() {
   return (
-    <div className="App josefin-sans-fancy">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Jacquard+12&family=Jersey+15&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-  </style>
-    <BrowserRouter >
-      <Header/>
-      <Routes>
-        <Route path="/" index element={<Home/>}/>
-        <Route path="/music" element={<MyMusic/>}/>
-        <Route path="/hire-me" element={<HireMe/>}/>
-      </Routes>
-      </BrowserRouter>
-      <Outlet/>
-      <Footer/>
-    </div>
+    <AppProvider>
+      <div className="App josefin-sans-fancy">
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Jacquard+12&family=Jersey+15&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+        </style>
+        <BrowserRouter >
+          <Header />
+          <Routes>
+            <Route path="/" index element={<Home />} />
+            <Route path="/music" element={<MyMusic />} />
+            <Route path="/hire-me" element={<HireMe />} />
+          </Routes>
+          <ToastMessage/>
+        </BrowserRouter>
+        <Outlet />
+        <Footer />
+      </div>
+    </AppProvider>
   );
 }
 
