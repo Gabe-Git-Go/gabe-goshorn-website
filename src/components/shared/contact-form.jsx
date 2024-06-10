@@ -28,6 +28,7 @@ export const ContactForm = ({ onSubmissionSuccessCallback }) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.stopPropagation();
+            return;
         }
         setValidated(true);
         const email = {
