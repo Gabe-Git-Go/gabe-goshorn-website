@@ -6,6 +6,7 @@ const axiosContext = axios.create({
     headers: {
       'Content-Type': 'application/json',
     },
+    withCredentials: true
 });
 
 export const getHttpClient=()=>{
