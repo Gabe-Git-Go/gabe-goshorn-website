@@ -124,7 +124,6 @@
 
 .selector-animation-wrapper {
     background: #e5dcdc;
-    padding-left: 5px;
 }
 
 #selector-title-animation {
@@ -471,6 +470,12 @@
 
     .volume-wrapper {
         display: none;
+    }
+}
+
+@media (max-height:886px) {
+    #music-animation-ctrl-wrapper.open {
+        height: 94%;
     }
 }
 
