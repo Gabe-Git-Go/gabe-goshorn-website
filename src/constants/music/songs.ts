@@ -1,7 +1,7 @@
 import { Song } from "../../models/my-music/song";
 //SONG ASSETS
 const thePark =require("../../assets/music-assets/music-audio/the_park_80_bpm.wav");
-const homeSweetHome = require('../../assets/music-assets/music-audio/home_sweet_home_80_bpm.wav');
+const homeSweetHome = require('../../assets/music-assets/music-audio/Home_Sweet_Home_Final.wav');
 const creepin = require('../../assets/music-assets/music-audio/creepin_130_bpm.wav');
 
 //IMAGE ASSETS
