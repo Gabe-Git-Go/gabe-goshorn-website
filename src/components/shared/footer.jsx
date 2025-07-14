@@ -5,10 +5,11 @@ import { GrGithub } from 'react-icons/gr';
 
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
   return (
     <footer className="footer">
       <div className="footer-content">
-        <p>&copy; 2024 Gabriel Goshorn. All rights reserved.</p>
+        <p>&copy; {currentYear} Gabriel Goshorn. All rights reserved.</p>
         <div className='footer-social-links'>
             <a href="https://www.instagram.com/g_a_b_e__g__b_a_b_y/"><BsInstagram/></a>
             <a href="https://soundcloud.com/gabe-goshorn"><FaSoundcloud/></a>
