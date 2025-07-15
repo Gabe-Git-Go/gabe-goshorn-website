@@ -46,7 +46,7 @@
     background-color: rgb(94, 93, 93);
     color: black;
     background: rgb(2, 0, 36);
-    background: linear-gradient(45deg, rgba(2, 0, 36, 1) 0%, rgba(186, 186, 198, 1) 17%, rgba(0, 212, 255, 1) 100%);
+    background: linear-gradient(0deg, rgba(237, 221, 209, 0.224) 0%, rgba(224, 217, 203, 0.297) 17%, rgba(158, 157, 155, 0.196) 50%);
     overflow: hidden;
     transition: all 1s ease-in-out;
 }
@@ -60,7 +60,7 @@
 }
 
 .picture-text-wrapper {
-    background-color: antiquewhite;
+    background-color: rgba(255, 203, 134, 0.475);
     height: 280px;
 }
 
@@ -80,7 +80,7 @@
     height: 954px;
     width: 654px;
     transition: all 1s ease-in-out;
-    border: aquamarine;
+    border: rgb(77, 77, 77);
     border-width: thick;
     border-style: ridge;
 
@@ -97,7 +97,7 @@
     height: 958px;
     width: 40px;
     opacity: .4;
-    background-color: darkorange;
+    background-color: rgb(217, 214, 211);
     color: antiquewhite;
     z-index: 2;
     transition: all 1s ease-in-out;
